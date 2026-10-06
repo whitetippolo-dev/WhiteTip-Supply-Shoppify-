@@ -141,6 +141,29 @@
                         </div>
                       {%- endif -%}
 
+                      {%- liquid
+                        assign wt_tracked = false
+                        if item.variant.inventory_management == 'shopify'
+                          assign wt_tracked = true
+                        endif
+                        assign wt_is_preorder = false
+                        if item.variant.available and wt_tracked and item.variant.inventory_quantity <= 0 and item.product.metafields.custom.lead_time_weeks.value
+                          assign wt_is_preorder = true
+                        endif
+                      -%}
+                      {%- if wt_is_preorder -%}
+                        <div class="wt-cart-preorder">
+                          {%- render 'wt-card-badge',
+                            available: item.variant.available,
+                            inventory_tracked: wt_tracked,
+                            inventory_quantity: item.variant.inventory_quantity,
+                            lead_time_weeks: item.product.metafields.custom.lead_time_weeks.value,
+                            low_stock_threshold: settings.low_stock_threshold
+                          -%}
+                          <span class="wt-cart-preorder__note">Paid in full today. Ships when it lands.</span>
+                        </div>
+                      {%- endif -%}
+
                       {%- if item.product.has_only_default_variant == false
                         or item.properties.size != 0
                         or item.selling_plan_allocation != null
@@ -467,6 +490,20 @@
     </form>
   </div>
 </cart-items>
+
+{% stylesheet %}
+  .wt-cart-preorder {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px 0;
+  }
+
+  .wt-cart-preorder__note {
+    font-size: var(--fs-web-label);
+    color: var(--wt-grey);
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

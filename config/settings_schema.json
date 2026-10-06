@@ -1426,7 +1426,7 @@
         "type": "checkbox",
         "id": "show_vendor",
         "label": "t:settings_schema.cart.settings.show_vendor.label",
-        "default": false
+        "default": true
       },
       {
         "type": "checkbox",
