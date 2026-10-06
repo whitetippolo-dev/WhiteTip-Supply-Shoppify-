@@ -1,0 +1,177 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "blocks": {
+        "eyebrow": {
+          "type": "text",
+          "settings": {
+            "text": "About WhiteTip Polo Supply",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Run by players",
+            "heading_size": "hxxl"
+          }
+        },
+        "lead": {
+          "type": "text",
+          "settings": {
+            "text": "Canoe polo gear imported direct, and tested by our own team before it reaches the shelf.",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "lead"],
+      "settings": {
+        "image_overlay_opacity": 60,
+        "image_height": "medium",
+        "desktop_content_position": "bottom-left",
+        "show_text_box": false,
+        "image_behavior": "none",
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "left",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "story": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Our story",
+            "text_style": "caption-with-letter-spacing",
+            "caption_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Gear we'd paddle with",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>WhiteTip Polo Supply started on the bank at Summer Series games. Good polo gear was hard to get in Australia, and hard to try before buying.</p><p>We import direct from leading makers in Europe and Asia, hold the core range in Adelaide, and run fit sessions in Adelaide and Tasmania so players can try a paddle or helmet before they commit.</p><p>Everything we stock is used by The WhiteTip, our own team, before it goes on sale.</p>"
+          }
+        }
+      },
+      "block_order": ["caption", "heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "padding_top": 88,
+        "padding_bottom": 36
+      }
+    },
+    "brands": {
+      "type": "wt-logo-list",
+      "blocks": {
+        "l1": { "type": "logo", "settings": { "name": "Braća-sport" } },
+        "l2": { "type": "logo", "settings": { "name": "Lettmann" } },
+        "l3": { "type": "logo", "settings": { "name": "Connect" } },
+        "l4": { "type": "logo", "settings": { "name": "CPS" } },
+        "l5": { "type": "logo", "settings": { "name": "DPP Dynamic" } },
+        "l6": { "type": "logo", "settings": { "name": "Falcon" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4", "l5", "l6"],
+      "settings": {
+        "eyebrow": "The makers we import",
+        "heading": "Our brands",
+        "link_label": "Shop by brand",
+        "link_url": "shopify://collections",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 88
+      }
+    },
+    "team": {
+      "type": "image-with-text",
+      "blocks": {
+        "eyebrow": {
+          "type": "caption",
+          "settings": {
+            "caption": "Summer Series",
+            "text_style": "caption-with-letter-spacing",
+            "caption_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "The WhiteTip",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our team plays the Summer Series. Every paddle and helmet we stock is tested in match play first.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Follow for updates",
+            "button_link": "",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "text", "button"],
+      "settings": {
+        "image_height": "large",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Kitting out a club or school?",
+            "heading_size": "h2"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Club orders",
+            "button_link_1": "shopify://pages/club-orders",
+            "button_style_secondary_1": false,
+            "button_label_2": "Contact us",
+            "button_link_2": "shopify://pages/contact",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["heading", "buttons"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    }
+  },
+  "order": ["hero", "story", "brands", "team", "cta"]
+}
