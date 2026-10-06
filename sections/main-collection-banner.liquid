@@ -7,11 +7,47 @@
       padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
     }
   }
+
+  .wt-breadcrumb {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: var(--fs-web-small);
+    color: var(--wt-grey);
+  }
+
+  .wt-breadcrumb a {
+    color: var(--wt-grey);
+  }
+
+  .wt-breadcrumb [aria-current] {
+    color: var(--wt-offwhite);
+  }
+
+  .collection-hero__title {
+    font-size: var(--fs-web-h2);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .collection-hero__description {
+    max-width: 640px;
+    font-size: var(--fs-web-body);
+    line-height: 1.5;
+    color: var(--wt-grey);
+  }
 {%- endstyle -%}
 
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="collection-hero__text-wrapper">
+      <nav class="wt-breadcrumb" aria-label="{{ 'general.breadcrumb.label' | t }}">
+        <a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ collection.title | escape }}</span>
+      </nav>
       <h1 class="collection-hero__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
