@@ -15,12 +15,37 @@
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
+  <div class="contact page-width{% if section.settings.details_heading == blank %} page-width--narrow{% else %} wt-contact--with-details{% endif %} section-{{ section.id }}-padding">
+    {%- if section.settings.details_heading != blank -%}
+      <div class="wt-contact-details">
+        {%- if section.settings.details_eyebrow != blank -%}
+          <div class="wt-section-eyebrow">{{ section.settings.details_eyebrow | escape }}</div>
+        {%- endif -%}
+        <h1 class="wt-contact-details__heading">{{ section.settings.details_heading }}</h1>
+        <div class="wt-contact-details__rule"></div>
+        {%- if section.settings.details_text != blank -%}
+          <div class="wt-contact-details__text rte">{{ section.settings.details_text }}</div>
+        {%- endif -%}
+        {%- if section.settings.details_list != blank -%}
+          <div class="wt-contact-details__list rte">{{ section.settings.details_list }}</div>
+        {%- endif -%}
+        {%- if section.settings.details_link_url != blank -%}
+          <a href="{{ section.settings.details_link_url }}" class="wt-contact-details__card">
+            <span>
+              <strong>{{ section.settings.details_link_heading | escape }}</strong>
+              <small>{{ section.settings.details_link_text | escape }}</small>
+            </span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="wt-contact-form-col">
     {%- if section.settings.heading != blank -%}
       <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         {{ section.settings.heading }}
       </h2>
-    {%- else -%}
+    {%- elsif section.settings.details_heading == blank -%}
       <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
     {%- endif -%}
     {%- liquid
@@ -198,10 +223,77 @@
         </button>
       </div>
     {%- endform -%}
+    </div>
   </div>
 </div>
 
 {% stylesheet %}
+  @media screen and (min-width: 990px) {
+    .wt-contact--with-details {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 120px;
+      max-width: none;
+    }
+  }
+
+  .wt-contact-details__heading {
+    margin: 0;
+    font-size: var(--fs-web-h2);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .wt-contact-details__rule {
+    width: 88px;
+    height: 1px;
+    background: var(--wt-teal);
+    margin: 24px 0;
+  }
+
+  .wt-contact-details__text,
+  .wt-contact-details__list {
+    max-width: 440px;
+    color: var(--wt-grey);
+  }
+
+  .wt-contact-details__list {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--wt-ocean-600);
+  }
+
+  .wt-contact-details__card {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    background: var(--wt-ocean-700);
+    border: 1px solid var(--wt-ocean-600);
+    color: var(--wt-offwhite);
+  }
+
+  .wt-contact-details__card:hover {
+    background: var(--wt-ocean-600);
+  }
+
+  .wt-contact-details__card strong {
+    display: block;
+    font-size: var(--fs-web-label);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .wt-contact-details__card small {
+    font-size: var(--fs-web-small);
+    color: var(--wt-grey);
+  }
+
   .wt-field-optional {
     margin-left: 8px;
     font-weight: 400;
@@ -355,6 +447,52 @@
     }
   ],
   "settings": [
+    {
+      "type": "header",
+      "content": "Details column (optional — leave heading blank to hide)"
+    },
+    {
+      "type": "text",
+      "id": "details_eyebrow",
+      "label": "Details eyebrow",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "details_heading",
+      "label": "Details heading",
+      "default": ""
+    },
+    {
+      "type": "richtext",
+      "id": "details_text",
+      "label": "Details intro text"
+    },
+    {
+      "type": "richtext",
+      "id": "details_list",
+      "label": "Details list",
+      "info": "E.g. a short paragraph per line: Email, Based in, Fit sessions, Instagram."
+    },
+    {
+      "type": "text",
+      "id": "details_link_heading",
+      "label": "Link card heading"
+    },
+    {
+      "type": "text",
+      "id": "details_link_text",
+      "label": "Link card text"
+    },
+    {
+      "type": "url",
+      "id": "details_link_url",
+      "label": "Link card URL"
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
     {
       "type": "inline_richtext",
       "id": "heading",
