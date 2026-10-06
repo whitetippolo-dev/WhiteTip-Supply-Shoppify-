@@ -1,0 +1,210 @@
+{% comment %}
+  WhiteTip custom section — Dawn has no logo-grid section natively.
+  Renders a grid of supplier-brand logos, white-treated (CSS filter) on
+  ocean-700 tiles, each linking to a collection/URL.
+{% endcomment %}
+
+<div class="color-{{ section.settings.color_scheme }} gradient wt-logo-list section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="wt-logo-list__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="wt-section-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="wt-logo-list__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link_url }}" class="wt-logo-list__link">{{ section.settings.link_label | escape }}</a>
+      {%- endif -%}
+    </div>
+    <div class="wt-logo-list__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'logo' -%}
+          <a
+            href="{{ block.settings.url }}"
+            aria-label="{{ block.settings.name | escape }}"
+            class="wt-logo-list__tile"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: block.settings.name }}
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .wt-logo-list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .wt-logo-list__heading {
+    margin: 16px 0 0;
+    font-size: var(--fs-web-h2);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .wt-logo-list__link {
+    font-size: var(--btn-fs);
+    font-weight: 600;
+    letter-spacing: var(--btn-track);
+    text-transform: uppercase;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--wt-teal);
+  }
+
+  .wt-logo-list__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .wt-logo-list__tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    padding: 24px;
+    background: var(--wt-ocean-700);
+    border: 1px solid var(--wt-ocean-600);
+  }
+
+  .wt-logo-list__tile:hover {
+    background: var(--wt-ocean-600);
+  }
+
+  .wt-logo-list__tile img {
+    max-width: 100%;
+    max-height: 48px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  @media screen and (max-width: 749px) {
+    .wt-logo-list__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wt-logo-list__tile img {
+      max-height: 36px;
+    }
+  }
+{% endstylesheet %}
+
+{% style %}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Logo list",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "default": "The makers we import",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Our brands",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "default": "Shop by brand",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Brand name",
+          "default": "Brand"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
