@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "main": {
+      "type": "wt-shipping-returns",
+      "blocks": {
+        "shipping": {
+          "type": "topic",
+          "settings": {
+            "heading": "Shipping",
+            "content": "<p>We ship from Adelaide, South Australia to anywhere in Australia. Orders placed before 2pm ACST on a business day leave the same day.</p><p>Metro areas: 2–5 business days. Regional, WA, NT, TAS: 4–10 business days. Boats ship by freight, booked with you, quoted per order.</p>"
+          }
+        },
+        "pickup": {
+          "type": "topic",
+          "settings": {
+            "heading": "Pick up",
+            "content": "<p>Choose local pick-up at checkout. We email you when your order is ready to collect in Adelaide.</p>"
+          }
+        },
+        "preorders": {
+          "type": "topic",
+          "settings": {
+            "heading": "Pre-orders",
+            "content": "<p>Pre-orders are paid in full at checkout. The lead time on the product page is our current estimate from the maker. We email you when your gear lands in Australia and again when it ships.</p>"
+          }
+        },
+        "returns": {
+          "type": "topic",
+          "settings": {
+            "heading": "Returns",
+            "content": "<p>Sealed, unused gear can be returned within 30 days of delivery.</p><ul><li>Keep the original packaging and tags.</li><li>Email hello@whitetippolo.com.au with your order number to start a return.</li><li>Refunds go to the original payment method within 5 business days of the item reaching us.</li></ul>",
+            "button_label": "Start a return",
+            "button_link": "mailto:hello@whitetippolo.com.au"
+          }
+        },
+        "damaged": {
+          "type": "topic",
+          "settings": {
+            "heading": "Damaged or faulty",
+            "content": "<p>If gear arrives damaged or develops a fault, email hello@whitetippolo.com.au with your order number and photos. Our goods come with guarantees that cannot be excluded under the Australian Consumer Law.</p>"
+          }
+        }
+      },
+      "block_order": ["shipping", "pickup", "preorders", "returns", "damaged"],
+      "settings": {
+        "heading": "Shipping & returns",
+        "intro": "<p>How we ship, how pre-orders work, and how to return gear.</p>",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": ["main"]
+}
