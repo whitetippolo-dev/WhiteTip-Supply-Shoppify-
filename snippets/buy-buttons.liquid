@@ -69,6 +69,15 @@
             if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
               assign quantity_rule_soldout = true
             endif
+
+            assign wt_tracked = false
+            if product.selected_or_first_available_variant.inventory_management == 'shopify'
+              assign wt_tracked = true
+            endif
+            assign wt_is_preorder = false
+            if product.selected_or_first_available_variant.available and wt_tracked and product.selected_or_first_available_variant.inventory_quantity <= 0 and product.metafields.custom.lead_time_weeks.value
+              assign wt_is_preorder = true
+            endif
           -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
@@ -87,6 +96,8 @@
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
+              {%- elsif wt_is_preorder -%}
+                Pre-order · pay in full
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
@@ -97,6 +108,16 @@
             {{ form | payment_button }}
           {%- endif -%}
         </div>
+        {%- if wt_is_preorder -%}
+          <div class="wt-preorder-note">
+            <span class="wt-preorder-note__label">How pre-orders work</span>
+            <p>
+              Paid in full at checkout. This length lands in about
+              {{ product.metafields.custom.lead_time_weeks.value }} weeks. We email you when it arrives
+              and again when it ships.
+            </p>
+          </div>
+        {%- endif -%}
       {%- endform -%}
     </product-form>
   {%- else -%}
@@ -149,3 +170,29 @@
     <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 </div>
+
+{% stylesheet %}
+  .wt-preorder-note {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--wt-ocean-700);
+    border: 1px solid var(--wt-ocean-600);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .wt-preorder-note__label {
+    font-size: var(--fs-web-label);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .wt-preorder-note p {
+    margin: 0;
+    font-size: var(--fs-web-small);
+    line-height: 1.5;
+    color: var(--wt-grey);
+  }
+{% endstylesheet %}

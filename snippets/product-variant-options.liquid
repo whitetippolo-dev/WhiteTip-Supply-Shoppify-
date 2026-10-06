@@ -37,6 +37,15 @@
     if value.available
       assign option_disabled = false
     endif
+
+    assign wt_tracked = false
+    if value.variant.inventory_management == 'shopify'
+      assign wt_tracked = true
+    endif
+    assign wt_value_preorder = false
+    if value.variant.available and wt_tracked and value.variant.inventory_quantity <= 0 and product.metafields.custom.lead_time_weeks.value
+      assign wt_value_preorder = true
+    endif
   -%}
 
   {%- capture input_id -%}
@@ -95,8 +104,11 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
+    <label for="{{ input_id }}" class="{% if wt_value_preorder %}wt-variant-option--preorder{% endif %}">
       {{ value -}}
+      {%- if wt_value_preorder -%}
+        <span class="wt-variant-option__sub">Pre-order</span>
+      {%- endif -%}
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
@@ -122,3 +134,22 @@
     </option>
   {%- endif -%}
 {%- endfor -%}
+
+{% stylesheet %}
+  .wt-variant-option--preorder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .wt-variant-option__sub {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--wt-grey);
+  }
+
+  input:checked + .wt-variant-option--preorder .wt-variant-option__sub {
+    color: inherit;
+  }
+{% endstylesheet %}
