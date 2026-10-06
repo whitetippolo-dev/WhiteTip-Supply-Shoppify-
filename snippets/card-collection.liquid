@@ -104,6 +104,9 @@
                 {%- endif %}
               </a>
             </h3>
+            {%- if card_collection != blank -%}
+              <span class="wt-collection-count">{{ card_collection.all_products_count }} products</span>
+            {%- endif -%}
             {%- if card_collection.description != blank -%}
               <p class="card__caption">
                 {{- card_collection.description | strip_html | truncatewords: 12 -}}
@@ -140,6 +143,9 @@
               {%- endif %}
             </a>
           </h3>
+          {%- if card_collection != blank -%}
+            <span class="wt-collection-count">{{ card_collection.all_products_count }} products</span>
+          {%- endif -%}
           {%- if card_collection.featured_image == null and card_collection.description != blank -%}
             <p class="card__caption">
               {{- card_collection.description | strip_html | truncatewords: 12 -}}
@@ -167,3 +173,26 @@
     {%- endif -%}
   </div>
 </div>
+
+{% stylesheet %}
+  .card__information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .card__information .card__heading {
+    font-size: var(--fs-web-small);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .wt-collection-count {
+    flex: none;
+    font-size: var(--fs-web-label);
+    font-weight: 500;
+    color: var(--wt-grey);
+  }
+{% endstylesheet %}

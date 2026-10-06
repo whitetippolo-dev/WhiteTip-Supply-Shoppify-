@@ -14,6 +14,22 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* WhiteTip category grid: fixed 4:3 image ratio regardless of the image_ratio
+     setting (Dawn offers adapt/portrait/square, none of which is 4:3) */
+  #shopify-section-{{ section.id }} .card__inner,
+  #shopify-section-{{ section.id }} .card {
+    --ratio-percent: 75% !important;
+  }
+
+  #shopify-section-{{ section.id }} .card {
+    background: var(--wt-ocean-700);
+    border: 1px solid var(--wt-ocean-600);
+  }
+
+  #shopify-section-{{ section.id }} .card:hover {
+    background: var(--wt-ocean-600);
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -207,7 +223,7 @@
       "min": 1,
       "max": 6,
       "step": 1,
-      "default": 3,
+      "default": 4,
       "label": "t:sections.collection-list.settings.columns_desktop.label"
     },
     {
@@ -241,7 +257,7 @@
           "label": "t:sections.collection-list.settings.columns_mobile.options__2.label"
         }
       ],
-      "default": "1",
+      "default": "2",
       "label": "t:sections.collection-list.settings.columns_mobile.label"
     },
     {
