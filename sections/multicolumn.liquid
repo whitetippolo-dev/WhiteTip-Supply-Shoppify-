@@ -13,6 +13,36 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* WhiteTip trust strip: flush ocean-900 panel, hairline dividers between columns */
+  #shopify-section-{{ section.id }} .multicolumn {
+    background: var(--wt-ocean-900);
+    border-bottom: 1px solid var(--wt-ocean-600);
+  }
+
+  #shopify-section-{{ section.id }} .multicolumn-card__info h3 {
+    font-size: var(--fs-web-label);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .multicolumn-card__info .rte {
+    font-size: var(--fs-web-small);
+    color: var(--wt-grey);
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .multicolumn-list__item:not(:last-child) {
+      border-right: 1px solid var(--wt-ocean-600);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .multicolumn-list__item:not(:last-child) {
+      border-bottom: 1px solid var(--wt-ocean-600);
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -339,7 +369,7 @@
           "label": "t:sections.multicolumn.settings.background_style.options__2.label"
         }
       ],
-      "default": "primary",
+      "default": "none",
       "label": "t:sections.multicolumn.settings.background_style.label"
     },
     {
