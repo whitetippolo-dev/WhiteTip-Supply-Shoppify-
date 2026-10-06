@@ -28,6 +28,9 @@
     data-product-id="{{ product.id }}"
   >
     {% if recommendations.performed and recommendations.products_count > 0 %}
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="wt-section-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
       <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
         {{ section.settings.heading }}
       </h2>
@@ -74,6 +77,12 @@
       "id": "heading",
       "default": "t:sections.related-products.settings.paragraph__1.default",
       "label": "t:sections.related-products.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "default": "Pairs well with",
+      "label": "Eyebrow"
     },
     {
       "type": "select",
@@ -165,7 +174,7 @@
           "label": "t:sections.related-products.settings.image_ratio.options__3.label"
         }
       ],
-      "default": "adapt",
+      "default": "square",
       "label": "t:sections.related-products.settings.image_ratio.label"
     },
     {
@@ -217,7 +226,7 @@
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "default": false,
+      "default": true,
       "label": "t:sections.related-products.settings.show_vendor.label"
     },
     {

@@ -37,6 +37,48 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    #MainProduct-{{ section.id }} .wt-product-vendor {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: var(--fs-web-label);
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--wt-teal);
+    }
+
+    #MainProduct-{{ section.id }} .product__title h2 {
+      font-size: var(--fs-web-h2);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    #MainProduct-{{ section.id }} .wt-pdp-stock {
+      margin-top: 16px;
+    }
+
+    #MainProduct-{{ section.id }} .wt-specs {
+      margin: 0;
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+    }
+
+    #MainProduct-{{ section.id }} .wt-specs dt {
+      padding: 8px 0;
+      font-size: var(--fs-web-small);
+      color: var(--wt-grey);
+      border-top: 1px solid var(--wt-ocean-600);
+    }
+
+    #MainProduct-{{ section.id }} .wt-specs dd {
+      margin: 0;
+      padding: 8px 0;
+      font-size: var(--fs-web-small);
+      border-top: 1px solid var(--wt-ocean-600);
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -98,6 +140,9 @@
                     {{- block.settings.text -}}
                   </p>
                 {%- when 'title' -%}
+                  {%- if product.vendor != blank -%}
+                    <a href="{{ product.vendor | url_for_vendor }}" class="wt-product-vendor">{{ product.vendor }}</a>
+                  {%- endif -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
                     <a href="{{ product.url }}" class="product__title">
@@ -113,6 +158,22 @@
                       use_variant: true,
                       show_badges: true,
                       price_class: 'price--large'
+                    -%}
+                  </div>
+                  {%- liquid
+                    assign wt_tracked = false
+                    if product.selected_or_first_available_variant.inventory_management == 'shopify'
+                      assign wt_tracked = true
+                    endif
+                  -%}
+                  <div class="wt-pdp-stock">
+                    {%- render 'wt-card-badge',
+                      available: product.selected_or_first_available_variant.available,
+                      inventory_tracked: wt_tracked,
+                      inventory_quantity: product.selected_or_first_available_variant.inventory_quantity,
+                      lead_time_weeks: product.metafields.custom.lead_time_weeks.value,
+                      low_stock_threshold: settings.low_stock_threshold,
+                      sold_out_color_scheme: settings.sold_out_badge_color_scheme
                     -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
@@ -210,6 +271,27 @@
                   </p>
                 {%- when 'custom_liquid' -%}
                   {{ block.settings.custom_liquid }}
+                {%- when 'wt_specs' -%}
+                  {%- if product.metafields.custom.specs.value.size > 0 -%}
+                    <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
+                      <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                        <summary>
+                          <div class="summary__title">
+                            <h2 class="h4 accordion__title inline-richtext">
+                              {{ block.settings.heading | default: 'Specifications' }}
+                            </h2>
+                          </div>
+                          {{- 'icon-caret.svg' | inline_asset_content -}}
+                        </summary>
+                        <dl class="wt-specs">
+                          {%- for spec in product.metafields.custom.specs.value -%}
+                            <dt>{{ spec.label.value }}</dt>
+                            <dd>{{ spec.value.value }}</dd>
+                          {%- endfor -%}
+                        </dl>
+                      </details>
+                    </div>
+                  {%- endif -%}
                 {%- when 'collapsible_tab' -%}
                   <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                     <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -1013,6 +1095,18 @@
           "id": "open_by_default",
           "label": "t:sections.disclosures.settings.open_by_default.label",
           "default": false
+        }
+      ]
+    },
+    {
+      "type": "wt_specs",
+      "name": "Specifications (metaobject)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Specifications",
+          "label": "Heading"
         }
       ]
     },
