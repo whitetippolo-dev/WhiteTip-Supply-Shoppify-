@@ -1,0 +1,134 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-with-text",
+      "blocks": {
+        "eyebrow": {
+          "type": "caption",
+          "settings": {
+            "caption": "Club & team orders",
+            "text_style": "caption-with-letter-spacing",
+            "caption_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Kitting out a whole squad?",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We quote matched paddles, helmets, decks and vests for clubs, schools and state squads. Volume pricing, one consolidated import, and fit sessions in Adelaide and Tasmania before you commit.</p><ul><li>Tiered pricing from 5 units</li><li>Club colours on helmets and decks</li><li>Invoicing for committees and schools</li></ul>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Start an enquiry",
+            "button_link": "#enquiry",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "text", "button"],
+      "settings": {
+        "image_height": "large",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "steps": {
+      "type": "multicolumn",
+      "blocks": {
+        "step1": {
+          "type": "column",
+          "settings": {
+            "title": "01 · Send an enquiry",
+            "text": "<p>Tell us how many players, which gear, and when you need it.</p>"
+          }
+        },
+        "step2": {
+          "type": "column",
+          "settings": {
+            "title": "02 · Fit session",
+            "text": "<p>Try paddle lengths, blade sizes and helmets in Adelaide or Tasmania. We confirm sizes per player.</p>"
+          }
+        },
+        "step3": {
+          "type": "column",
+          "settings": {
+            "title": "03 · One consolidated order",
+            "text": "<p>We quote, invoice your club or school, and bring everything in on one import.</p>"
+          }
+        }
+      },
+      "block_order": ["step1", "step2", "step3"],
+      "settings": {
+        "title": "Three steps to a matched squad",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "enquiry": {
+      "type": "contact-form",
+      "blocks": {
+        "club_name": {
+          "type": "custom_text",
+          "settings": { "label": "Club or school", "input_type": "text", "optional": false }
+        },
+        "state": {
+          "type": "custom_select",
+          "settings": {
+            "label": "State",
+            "options": "South Australia\nTasmania\nVictoria\nNew South Wales\nQueensland\nWestern Australia\nACT\nNorthern Territory"
+          }
+        },
+        "players": {
+          "type": "custom_text",
+          "settings": { "label": "Number of players", "input_type": "number", "optional": false }
+        },
+        "gear": {
+          "type": "custom_checkboxes",
+          "settings": {
+            "label": "Gear needed",
+            "options": "Paddles\nBoats\nHelmets\nBuoyancy vests\nSpraydecks\nBalls & goals"
+          }
+        },
+        "needed_by": {
+          "type": "custom_select",
+          "settings": {
+            "label": "Needed by",
+            "options": "Before the next Summer Series\nWithin 3 months\nWithin 6 months\nNo fixed date"
+          }
+        }
+      },
+      "block_order": ["club_name", "state", "players", "gear", "needed_by"],
+      "settings": {
+        "heading": "Tell us about your squad",
+        "heading_size": "h1",
+        "color_scheme": "scheme-2",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    }
+  },
+  "order": ["hero", "steps", "enquiry"]
+}
