@@ -7,13 +7,13 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#FFFFFF",
+            "background": "#012A36",
             "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
-            "button_label": "#FFFFFF",
-            "secondary_button_label": "#121212",
-            "shadow": "#121212"
+            "text": "#F9FAF9",
+            "button": "#009CA6",
+            "button_label": "#012A36",
+            "secondary_button_label": "#F9FAF9",
+            "shadow": "#011D26"
           }
         },
         "scheme-2": {
@@ -61,9 +61,9 @@
           }
         }
       },
-      "type_header_font": "assistant_n4",
+      "type_header_font": "montserrat_n4",
       "heading_scale": 100,
-      "type_body_font": "assistant_n4",
+      "type_body_font": "montserrat_n4",
       "body_scale": 100,
       "page_width": 1200,
       "spacing_sections": 0,
@@ -80,7 +80,7 @@
       "buttons_shadow_blur": 5,
       "variant_pills_border_thickness": 1,
       "variant_pills_border_opacity": 55,
-      "variant_pills_radius": 40,
+      "variant_pills_radius": 0,
       "variant_pills_shadow_opacity": 0,
       "variant_pills_shadow_horizontal_offset": 0,
       "variant_pills_shadow_vertical_offset": 4,

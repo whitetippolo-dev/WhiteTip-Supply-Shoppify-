@@ -1,0 +1,104 @@
+/* WhiteTip Polo Supply — brand tokens layered on top of Dawn's own settings-driven
+   CSS variables (--color-*, --font-*). Ported from the approved design system
+   (colors.css, typography.css, spacing.css, effects.css) plus the approved
+   web-tokens.css additions. Values are fixed, not merchant-editable: the brand
+   is a single four-colour, flat, angular system with no light-mode variant. */
+
+:root {
+  /* ---- Base palette (mirrors Dawn's scheme-1, kept as named vars for components
+     that need a specific step rather than "the" background/text/button) ---- */
+  --wt-ocean: #012A36;
+  --wt-offwhite: #F9FAF9;
+  --wt-teal: #009CA6;
+  --wt-grey: #C5C8C9;
+
+  --wt-ocean-900: #011D26;
+  --wt-ocean-800: #012A36;
+  --wt-ocean-700: #073744;
+  --wt-ocean-600: #0E4654;
+
+  --wt-teal-bright: #18B6C0;
+  --wt-teal-deep: #007A82;
+
+  --wt-offwhite-30: rgba(249, 250, 249, 0.30);
+  --wt-offwhite-12: rgba(249, 250, 249, 0.12);
+  --wt-teal-25: rgba(0, 156, 166, 0.25);
+  --wt-teal-12: rgba(0, 156, 166, 0.12);
+  --wt-scrim: rgba(1, 21, 28, 0.62);
+
+  /* ---- Spacing scale (8px base) ---- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 88px;
+  --space-8: 120px;
+
+  /* ---- Lines / radii — angular brand, sharp by default ---- */
+  --hairline: 1px;
+  --rule-width-sm: 88px;
+  --rule-width-md: 160px;
+  --rule-width-lg: 280px;
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+
+  /* ---- Effects — flat brand: no shadows, no glows, no gradients ---- */
+  --shadow-none: none;
+  --glow-none: none;
+  --gradient-none: none;
+  --overlay-scrim: var(--wt-scrim);
+  --accent-size: 220px;
+  --accent-size-mobile: 88px;
+  --accent-opacity: 0.22;
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  --focus-ring: 0 0 0 3px var(--wt-teal-25);
+
+  /* ---- Web type scale (approved web-tokens.css — final) ---- */
+  --fs-web-display: 88px;
+  --fs-web-display-m: 48px;
+  --fs-web-h2: 48px;
+  --fs-web-h2-m: 28px;
+  --fs-web-h3: 24px;
+  --fs-web-lead: 18px;
+  --fs-web-body: 16px;
+  --fs-web-small: 14px;
+  --fs-web-label: 12px; /* 12px = floor, nothing smaller anywhere on the site */
+
+  /* ---- Buttons / inputs / focus (approved web-tokens.css — final) ---- */
+  --btn-height: 48px;
+  --btn-pad-x: 32px;
+  --btn-fs: 12px;
+  --btn-track: 0.22em;
+  --btn-weight: 700;
+  --input-height: 48px;
+  --input-border: var(--wt-grey);
+  --focus-outline: 2px solid var(--wt-teal-bright);
+  --focus-offset: 2px;
+
+  /* ---- Tracking / leading (typography.css) ---- */
+  --track-eyebrow: 0.32em;
+  --track-footer: 0.46em;
+  --track-headline: 0.04em;
+  --track-subline: 0.18em;
+  --track-cta: 0.22em;
+  --leading-tight: 0.98;
+  --leading-snug: 1.12;
+  --leading-body: 1.5;
+}
+
+/* Brand-wide resets that aren't exposed as Dawn settings */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
