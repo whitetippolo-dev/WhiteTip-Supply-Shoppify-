@@ -26,6 +26,62 @@
 {%- style -%}
   #Banner-{{ section.id }}::after {
     opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+    background: #01151C; /* wt-scrim base colour; opacity carries the brand's 62% */
+  }
+
+  /* WhiteTip corner accent: teal angular triangle, top-right, ~22% opacity */
+  #Banner-{{ section.id }} .banner__media::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: var(--accent-size) solid var(--wt-teal-25);
+    border-left: var(--accent-size) solid transparent;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    #Banner-{{ section.id }} .banner__media::before {
+      border-top-width: var(--accent-size-mobile);
+      border-left-width: var(--accent-size-mobile);
+    }
+  }
+
+  #Banner-{{ section.id }} .banner__heading {
+    position: relative;
+    padding-bottom: 24px;
+  }
+
+  #Banner-{{ section.id }} .banner__heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 160px;
+    height: 1px;
+    background: var(--wt-teal);
+  }
+
+  #Banner-{{ section.id }} .banner__content--center .banner__heading::after,
+  #Banner-{{ section.id }} .banner__box[style*='text-align: center'] .banner__heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #Banner-{{ section.id }} .banner__text.caption-with-letter-spacing {
+    color: var(--wt-teal);
+    font-size: var(--fs-web-label);
+    font-weight: 600;
+    letter-spacing: 0.32em;
+  }
+
+  @media screen and (max-width: 749px) {
+    #Banner-{{ section.id }} .banner__heading::after {
+      width: 88px;
+    }
   }
 {%- endstyle -%}
 
@@ -193,7 +249,7 @@
       "step": 10,
       "unit": "%",
       "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
-      "default": 0
+      "default": 60
     },
     {
       "type": "select",
@@ -216,7 +272,7 @@
           "label": "t:sections.image-banner.settings.image_height.options__4.label"
         }
       ],
-      "default": "medium",
+      "default": "large",
       "label": "t:sections.image-banner.settings.image_height.label"
     },
     {
@@ -288,7 +344,7 @@
           "label": "t:sections.image-banner.settings.desktop_content_position.options__9.label"
         }
       ],
-      "default": "middle-center",
+      "default": "bottom-left",
       "label": "t:sections.image-banner.settings.desktop_content_position.label"
     },
     {
@@ -308,13 +364,13 @@
           "label": "t:sections.image-banner.settings.desktop_content_alignment.options__3.label"
         }
       ],
-      "default": "center",
+      "default": "left",
       "label": "t:sections.image-banner.settings.desktop_content_alignment.label"
     },
     {
       "type": "checkbox",
       "id": "show_text_box",
-      "default": true,
+      "default": false,
       "label": "t:sections.image-banner.settings.show_text_box.label"
     },
     {
@@ -350,7 +406,7 @@
           "label": "t:sections.image-banner.settings.mobile_content_alignment.options__3.label"
         }
       ],
-      "default": "center",
+      "default": "left",
       "label": "t:sections.image-banner.settings.mobile_content_alignment.label"
     },
     {
