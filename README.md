@@ -1,196 +1,99 @@
-<h1 align="center" style="position: relative;">
-  <br>
-    <img src="./assets/shoppy-x-ray.svg" alt="logo" width="200">
-  <br>
-  Shopify Skeleton Theme
-</h1>
+# Dawn
 
-A minimal Shopify theme built on block-first composition. Templates compose each
-page directly from blocks, snippets, and inline markup — no sections, no JSON
-templates. It's designed to stay lean and to be edited by coding agents as
-readily as by people.
+[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)
 
-<p align="center">
-  <a href="./LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
-  <a href="./actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Shopify/skeleton-theme/actions/workflows/ci.yml/badge.svg"></a>
-</p>
+[Getting started](#getting-started) |
+[Staying up to date with Dawn changes](#staying-up-to-date-with-dawn-changes) |
+[Developer tools](#developer-tools) |
+[Contributing](#contributing) |
+[Code of conduct](#code-of-conduct) |
+[Theme Store submission](#theme-store-submission) |
+[License](#license)
+
+Dawn represents a HTML-first, JavaScript-only-as-needed approach to theme development. It's Shopify's first source available theme with performance, flexibility, and [Online Store 2.0 features](https://www.shopify.com/partners/blog/shopify-online-store) built-in and acts as a reference for building Shopify themes.
+
+* **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
+* **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
+* **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
+* **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+
+You can find a more detailed version of our theme code principles in the [contribution guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md#theme-code-principles).
 
 ## Getting started
+We recommend using Dawn as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
 
-### Prerequisites
+> If you're building a theme for the Shopify Theme Store, then you can use Dawn as a starting point. However, the theme that you submit needs to be [substantively different from Dawn](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Dawn](https://shopify.dev/themes/tools/dawn#ways-to-use-dawn).
 
-Before starting, ensure you have the latest Shopify CLI installed:
+Please note that the main branch may include code for features not yet released. The "stable" version of Dawn is available in the theme store.
 
-- [Shopify CLI](https://shopify.dev/docs/api/shopify-cli) – helps you download, upload, preview themes, and streamline your workflows
+## Staying up to date with Dawn changes
 
-If you use VS Code:
+Say you're building a new theme off Dawn but you still want to be able to pull in the latest changes, you can add a remote `upstream` pointing to this Dawn repository.
 
-- [Shopify Liquid VS Code Extension](https://shopify.dev/docs/storefronts/themes/tools/shopify-liquid-vscode) – provides syntax highlighting, linting, inline documentation, and auto-completion specifically designed for Liquid templates
+1. Navigate to your local theme folder.
+2. Verify the list of remotes and validate that you have both an `origin` and `upstream`:
+```sh
+git remote -v
+```
+3. If you don't see an `upstream`, you can add one that points to Shopify's Dawn repository:
+```sh
+git remote add upstream https://github.com/Shopify/dawn.git
+```
+4. Pull in the latest Dawn changes into your repository:
+```sh
+git fetch upstream
+git pull upstream main
+```
 
-### Clone
+## Developer tools
 
-Clone this repository using Git or Shopify CLI:
+There are a number of really useful tools that the Shopify Themes team uses during development. Dawn is already set up to work with these tools.
+
+### Shopify CLI
+
+[Shopify CLI](https://github.com/Shopify/shopify-cli) helps you build Shopify themes faster and is used to automate and enhance your local development workflow. It comes bundled with a suite of commands for developing Shopify themes—everything from working with themes on a Shopify store (e.g. creating, publishing, deleting themes) or launching a development server for local theme development.
+
+You can follow this [quick start guide for theme developers](https://shopify.dev/docs/themes/tools/cli) to get started.
+
+### Theme Check
+
+We recommend using [Theme Check](https://github.com/shopify/theme-check) as a way to validate and lint your Shopify themes.
+
+We've added Theme Check to Dawn's [list of VS Code extensions](/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Dawn.
+
+You can also run it from a terminal with the following Shopify CLI command:
 
 ```bash
-git clone git@github.com:Shopify/skeleton-theme.git
-# or
-shopify theme init
+shopify theme check
 ```
 
-### Preview
+### Continuous Integration
 
-Preview this theme using Shopify CLI:
+Dawn uses [GitHub Actions](https://github.com/features/actions) to maintain the quality of the theme. [This is a starting point](https://github.com/Shopify/dawn/blob/main/.github/workflows/ci.yml) and what we suggest to use in order to ensure you're building better themes. Feel free to build off of it!
 
-```bash
-shopify theme dev
-```
+#### Shopify/lighthouse-ci-action
 
-## Theme architecture
+We love fast websites! Which is why we created [Shopify/lighthouse-ci-action](https://github.com/Shopify/lighthouse-ci-action). This runs a series of [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) audits for the home, product and collections pages on a store to ensure code that gets added doesn't degrade storefront performance over time.
 
-```bash
-.
-├── assets          # CSS, JavaScript, and other static assets
-├── blocks          # Reusable, customizable UI components
-├── config          # Global theme settings and customization options
-├── layout          # Top-level page wrappers
-├── locales         # Translation files for theme internationalization
-├── snippets        # Reusable Liquid code or HTML fragments
-└── templates       # Liquid composition roots, one per page type
-```
+#### Shopify/theme-check-action
 
-To learn more, refer to the [theme architecture documentation](https://shopify.dev/docs/storefronts/themes/architecture).
-
-## Block-first composition
-
-Every page is composed from blocks. The composition flows in one direction:
-
-```
-templates/*.liquid → {% block 'container' %} → blocks / snippets / inline markup
-```
-
-### Templates
-
-[Templates](https://shopify.dev/docs/storefronts/themes/architecture/templates#template-types)
-control what's rendered on each type of page. In this theme they are Liquid
-files (`templates/*.liquid`), not JSON. Each template is a composition root:
-it wraps its page content in one or more `container` blocks — one per vertical
-slice — and composes blocks, snippets, and inline markup inside them. The layout
-renders `content_for_layout` in a plain `<main>` and reserves the `container`
-block for the header and footer only.
-
-For example, `templates/index.liquid` wraps the `hello-world` block in a
-container:
-
-```liquid
-{% block 'container' %}
-  {% block 'hello-world' %}
-    {% block 'liquid-tips', tips: ['hello_world.liquid_tips_1', 'hello_world.liquid_tips_2', 'hello_world.liquid_tips_3'] %}{% endblock %}
-  {% endblock %}
-{% endblock %}
-```
-
-### Blocks
-
-[Blocks](https://shopify.dev/docs/storefronts/themes/architecture/blocks) are
-the theme's building units. Each block is a single file in `blocks/`, opens with
-a `{% doc %}` header describing its parameters, and ends with a `{% schema %}`
-(no `presets`). A block renders caller-supplied content through
-`{{ content }}` and keeps `{{ block.shopify_attributes }}` on its root
-element for theme-editor support. Self-contained blocks can omit the content
-outlet and accept an empty body.
-
-Executable `{% block %}` calls belong only in `layout/` and `templates/`.
-Nested calls stay in the caller-owned body, rather than in block or snippet
-implementations. The body renders in the caller's scope before the block
-implementation; it cannot read that block's settings or local assignments.
-
-Pass all parameters as plain named arguments:
-
-```liquid
-{% block 'container', alignment: 'center', tag: 'div' %}
-  {{ page.content }}
-{% endblock %}
-```
-
-Every argument is a plain variable inside the block. Since the container
-schema declares `alignment`, that argument also sets
-`block.settings.alignment`: both reads return `center`. The `tag` argument
-has no matching schema setting, so it is only the variable `tag`. `class`
-is likewise an ordinary parameter with no special platform behavior.
-
-LiquidDoc documents parameters; it does not declare, validate, or bind them.
-Use schema settings for merchant-editable controls, and document whether body
-content is required (`@param {string} content`) or optional
-(`@param {string} [content]`). Prefer body content for display-only text and
-markup; use parameters for data or choices that affect how a block renders.
-Inline literal arrays, such as the `tips` list above, are supported by the
-block tag; render and partial tags do not accept inline literal arrays.
-
-The `container` block owns a page region's outer layout element. Each template
-wraps its content in one or more `container` blocks, and `layout/theme.liquid`
-wraps the `header` and `footer` blocks in their own containers while rendering
-`content_for_layout` in a plain `<main>`. `blocks/hello-world.liquid` is the
-theme's starter demo block.
-
-## Non-negotiables
-
-This theme deliberately excludes the section-based model. When editing it:
-
-- No `sections/` directory, and no `{% section %}` / `{% sections %}` tags.
-- No JSON templates and no schema `presets`.
-- No Liquid-embedded assets: keep all CSS and JavaScript in `assets/` rather
-  `{% stylesheet %}` / `{% javascript %}` blocks.
-- Compose pages from blocks and inline markup, not single-use page sections.
-- Invoke blocks only in layouts and templates; render caller bodies with
-  `{{ content }}` inside block implementations.
-
-[`AGENTS.md`](./AGENTS.md) is the source of truth for the theme's dialect and the
-full set of rules coding agents follow.
-
-## CSS and JavaScript
-
-All theme CSS and JavaScript live in [`assets/`](./assets/), rather than being
-embedded in Liquid. This keeps blocks focused on markup without requiring
-assets to live in a single file.
-
-## Partial updates
-
-Partials mark named regions of server-rendered HTML that JavaScript can update
-without a full page reload. Wrap only the content that changes. In this theme,
-`blocks/liquid-tips.liquid` wraps the tip sentence in
-`{% partial 'liquid-tip' %}...{% endpartial %}`, and
-`assets/liquid-tips.js` updates it with:
-
-```js
-import { partials } from '@shopify/partial-rendering';
-
-await partials.refresh('liquid-tip');
-```
-
-The Liquid region name and JavaScript target must match. `refresh()` fetches
-and applies updates from the current page URL. Use `fetch()` followed by
-`apply()` for control over the request or when the update appears, and fetch
-related regions together. Build URLs from the current page URL or Liquid
-`routes.*` so requests preserve locale and market routing.
-
-`apply()` preserves focus, text selection, form values, and scroll position.
-If the server corrects a form value, such as a cart quantity, explicitly update
-the control after applying the partial; the returned markup alone does not
-replace its preserved value. Cancel stale requests, provide loading feedback
-and accessible announcements, and restore transient state such as open
-disclosures. Read URL state from `window.location.search` for shared links
-and browser navigation.
-
-The partial tag currently requires `shop.features.agentic_editor_enabled?`
-and StorefrontRenderer; otherwise the storefront raises
-`Unknown tag 'partial'`.
+Dawn runs [Theme Check](#Theme-Check) on every commit via [Shopify/theme-check-action](https://github.com/Shopify/theme-check-action).
 
 ## Contributing
 
-We're excited for your contributions to the Skeleton Theme! This repository aims to remain as lean, lightweight, and fundamental as possible, and we kindly ask your contributions to align with this intention.
+Want to make commerce better for everyone by contributing to Dawn? We'd love your help! Please read our [contributing guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md) to learn about our development process, how to propose bug fixes and improvements, and how to build for Dawn.
 
-Visit our [CONTRIBUTING.md](./CONTRIBUTING.md) for a detailed overview of our process, guidelines, and recommendations.
+## Code of conduct
+
+All developers who wish to contribute through code or issues, please first read our [Code of Conduct](https://github.com/Shopify/dawn/blob/main/.github/CODE_OF_CONDUCT.md).
+
+## Theme Store submission
+
+The [Shopify Theme Store](https://themes.shopify.com/) is the place where Shopify merchants find the themes that they'll use to showcase and support their business. As a theme partner, you can create themes for the Shopify Theme Store and reach an international audience of an ever-growing number of entrepreneurs.
+
+Ensure that you follow the list of [theme store requirements](https://shopify.dev/themes/store/requirements) if you're interested in becoming a [Shopify Theme Partner](https://themes.shopify.com/services/themes/guidelines) and building themes for the Shopify platform.
 
 ## License
 
-Skeleton Theme is open-sourced under the [MIT](./LICENSE.md) License.
+Copyright (c) 2021-present Shopify Inc. See [LICENSE](/LICENSE.md) for further details.
