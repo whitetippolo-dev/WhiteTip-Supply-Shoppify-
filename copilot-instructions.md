@@ -1,0 +1,1 @@
+/Users/alexandertrewartha/whitetip-theme/AGENTS.md
