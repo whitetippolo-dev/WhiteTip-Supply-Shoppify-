@@ -39,6 +39,16 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+
+    # WhiteTip stock/lead-time badge: raw facts only, wt-card-badge decides the state
+    assign wt_variant = card_product.selected_or_first_available_variant
+    assign wt_tracked = false
+    if wt_variant.inventory_management == 'shopify'
+      assign wt_tracked = true
+    endif
+    assign wt_lead_time = card_product.metafields.custom.lead_time_weeks.value
+    assign wt_badge_id_nomedia = 'NoMediaStandardBadge-' | append: section_id | append: '-' | append: card_product.id
+    assign wt_badge_id_media = 'Badge-' | append: section_id | append: '-' | append: card_product.id
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
@@ -127,21 +137,15 @@
               </h3>
             </div>
             <div class="card__badge {{ settings.badge_position }}">
-              {%- if card_product.available == false -%}
-                <span
-                  id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                  class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-                >
-                  {{- 'products.product.sold_out' | t -}}
-                </span>
-              {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-                <span
-                  id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-                >
-                  {{- 'products.product.on_sale' | t -}}
-                </span>
-              {%- endif -%}
+              {%- render 'wt-card-badge',
+                available: card_product.available,
+                inventory_tracked: wt_tracked,
+                inventory_quantity: wt_variant.inventory_quantity,
+                lead_time_weeks: wt_lead_time,
+                low_stock_threshold: settings.low_stock_threshold,
+                id: wt_badge_id_nomedia,
+                sold_out_color_scheme: settings.sold_out_badge_color_scheme
+              -%}
             </div>
           </div>
         </div>
@@ -165,10 +169,12 @@
             <div class="card-information">
               {%- if show_vendor -%}
                 <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
+                <div class="caption-with-letter-spacing light wt-card-vendor">{{ card_product.vendor }}</div>
               {%- endif -%}
 
-              <span class="caption-large light">{{ block.settings.description | escape }}</span>
+              {%- if card_product.metafields.custom.card_spec.value != blank -%}
+                <span class="caption-large light wt-card-spec">{{ card_product.metafields.custom.card_spec.value | escape }}</span>
+              {%- endif -%}
 
               {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
                 {% liquid
@@ -551,21 +557,15 @@
             {% endif %}
           {% endif %}
           <div class="card__badge {{ settings.badge_position }}">
-            {%- if card_product.available == false -%}
-              <span
-                id="Badge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-              >
-                {{- 'products.product.sold_out' | t -}}
-              </span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-              <span
-                id="Badge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-              >
-                {{- 'products.product.on_sale' | t -}}
-              </span>
-            {%- endif -%}
+            {%- render 'wt-card-badge',
+              available: card_product.available,
+              inventory_tracked: wt_tracked,
+              inventory_quantity: wt_variant.inventory_quantity,
+              lead_time_weeks: wt_lead_time,
+              low_stock_threshold: settings.low_stock_threshold,
+              id: wt_badge_id_media,
+              sold_out_color_scheme: settings.sold_out_badge_color_scheme
+            -%}
           </div>
         </div>
       </div>
@@ -625,3 +625,29 @@
     </div>
   </div>
 {%- endif -%}
+
+{% stylesheet %}
+  .wt-card-vendor {
+    font-size: var(--fs-web-label);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--wt-teal);
+  }
+
+  .wt-card-spec {
+    font-size: var(--fs-web-small);
+    color: var(--wt-grey);
+  }
+
+  .card__heading {
+    font-size: var(--fs-web-body);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .card-information .price {
+    font-size: var(--fs-web-lead);
+    font-weight: 700;
+  }
+{% endstylesheet %}

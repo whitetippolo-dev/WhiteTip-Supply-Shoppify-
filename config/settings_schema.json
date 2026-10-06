@@ -1466,5 +1466,20 @@
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
       }
     ]
+  },
+  {
+    "name": "WhiteTip",
+    "settings": [
+      {
+        "type": "range",
+        "id": "low_stock_threshold",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "default": 5,
+        "label": "Low stock threshold",
+        "info": "Product cards show \"Only N left\" at or below this inventory count. Above it, they show a plain in-stock indicator."
+      }
+    ]
   }
 ]

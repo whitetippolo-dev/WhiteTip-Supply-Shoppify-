@@ -1,0 +1,100 @@
+{% doc %}
+  Renders the WhiteTip 3-state stock/lead-time badge: in-stock (teal-outline
+  dot), low-stock (count), or pre-order (lead time in weeks). Falls back to
+  Dawn's native sold-out badge when the product is genuinely unavailable
+  with no lead time set. Takes raw product facts and decides the state
+  itself, so callers (card-product.liquid, main-product.liquid,
+  main-cart-items.liquid) don't have to duplicate the branching.
+
+  @param {boolean} available - product.available or variant.available
+  @param {boolean} inventory_tracked - true when inventory_management == 'shopify'
+  @param {number} inventory_quantity - variant.inventory_quantity
+  @param {number} [lead_time_weeks] - product.metafields.custom.lead_time_weeks.value
+  @param {number} low_stock_threshold - settings.low_stock_threshold
+  @param {string} [id] - element id, referenced by aria-labelledby on some cards
+  @param {string} [sold_out_color_scheme] - Dawn color scheme for the sold-out fallback
+
+  @example
+  {% render 'wt-card-badge',
+    available: product.available,
+    inventory_tracked: inventory_tracked,
+    inventory_quantity: variant.inventory_quantity,
+    lead_time_weeks: product.metafields.custom.lead_time_weeks.value,
+    low_stock_threshold: settings.low_stock_threshold,
+    sold_out_color_scheme: settings.sold_out_badge_color_scheme
+  %}
+{% enddoc %}
+
+{%- liquid
+  assign badge_type = 'none'
+  if available and inventory_tracked and inventory_quantity <= 0 and lead_time_weeks
+    assign badge_type = 'pre'
+    assign badge_label = 'Pre-order · ' | append: lead_time_weeks | append: ' wks'
+  elsif available and inventory_tracked and inventory_quantity > 0 and inventory_quantity <= low_stock_threshold
+    assign badge_type = 'low'
+    assign badge_label = 'Only ' | append: inventory_quantity | append: ' left'
+  elsif available
+    assign badge_type = 'stock'
+    assign badge_label = 'In stock'
+  endif
+-%}
+
+{%- if badge_type == 'stock' -%}
+  <span id="{{ id }}" class="wt-badge wt-badge--stock">
+    <span class="wt-badge__dot" aria-hidden="true"></span>{{ badge_label }}
+  </span>
+{%- elsif badge_type == 'low' -%}
+  <span id="{{ id }}" class="wt-badge wt-badge--low">{{ badge_label }}</span>
+{%- elsif badge_type == 'pre' -%}
+  <span id="{{ id }}" class="wt-badge wt-badge--pre">{{ badge_label }}</span>
+{%- else -%}
+  <span id="{{ id }}" class="badge badge--bottom-left color-{{ sold_out_color_scheme }}">
+    {{- 'products.product.sold_out' | t -}}
+  </span>
+{%- endif -%}
+
+{% stylesheet %}
+  .wt-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 16px;
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-web-label);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .wt-badge--stock {
+    background: var(--wt-ocean);
+    border: 1px solid var(--wt-teal);
+    color: var(--wt-teal);
+  }
+
+  .wt-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-pill);
+    background: var(--wt-teal);
+  }
+
+  .wt-badge--low {
+    background: var(--wt-ocean);
+    border: 1px solid var(--wt-teal);
+    color: var(--wt-offwhite);
+  }
+
+  .wt-badge--pre {
+    background: var(--wt-offwhite);
+    color: var(--wt-ocean);
+  }
+
+  @media screen and (max-width: 749px) {
+    .wt-badge {
+      height: 28px;
+      padding: 0 14px;
+    }
+  }
+{% endstylesheet %}
