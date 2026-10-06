@@ -99,18 +99,84 @@
           {%- endif -%}
         </div>
       </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+      <div class="contact__fields">
+        <div class="field">
+          <input
+            type="tel"
+            id="ContactForm-phone"
+            class="field__input"
+            autocomplete="tel"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            pattern="[0-9\-]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.phone' | t }}"
+          >
+          <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+        </div>
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'custom_text' -%}
+              <div class="field" {{ block.shopify_attributes }}>
+                <input
+                  type="{{ block.settings.input_type }}"
+                  id="ContactForm-{{ block.id }}"
+                  class="field__input"
+                  name="contact[{{ block.settings.label }}]"
+                  placeholder="{{ block.settings.label }}{% if block.settings.optional %} (optional){% endif %}"
+                  {% unless block.settings.optional %}
+                    aria-required="true"
+                  {% endunless %}
+                >
+                <label class="field__label" for="ContactForm-{{ block.id }}">
+                  {{- block.settings.label -}}
+                  {% if block.settings.optional %}<span class="wt-field-optional">optional</span>{% endif %}
+                </label>
+              </div>
+            {%- when 'custom_select' -%}
+              {%- assign wt_select_options = block.settings.options | newline_to_br | strip_newlines | split: '<br />' -%}
+              <div class="field" {{ block.shopify_attributes }}>
+                <select
+                  id="ContactForm-{{ block.id }}"
+                  class="field__input wt-select"
+                  name="contact[{{ block.settings.label }}]"
+                >
+                  {%- for option in wt_select_options -%}
+                    {%- if option != blank -%}
+                      <option value="{{ option | strip | escape }}">{{ option | strip | escape }}</option>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </select>
+                <label class="field__label wt-select-label" for="ContactForm-{{ block.id }}">
+                  {{- block.settings.label -}}
+                </label>
+              </div>
+            {%- when 'custom_checkboxes' -%}
+              {%- assign wt_checkbox_options = block.settings.options | newline_to_br | strip_newlines | split: '<br />' -%}
+              <fieldset class="field field--full wt-checkbox-group" {{ block.shopify_attributes }}>
+                <legend class="field__label wt-checkbox-group__legend">{{ block.settings.label }}</legend>
+                <div class="wt-checkbox-group__options">
+                  {%- for option in wt_checkbox_options -%}
+                    {%- if option != blank -%}
+                      {%- assign option_clean = option | strip -%}
+                      {%- assign option_id = 'ContactForm-' | append: block.id | append: '-' | append: forloop.index -%}
+                      <input
+                        type="checkbox"
+                        id="{{ option_id }}"
+                        class="wt-checkbox-group__input"
+                        name="contact[{{ block.settings.label | escape }}][]"
+                        value="{{ option_clean | escape }}"
+                      >
+                      <label for="{{ option_id }}" class="wt-checkbox-group__pill">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>
+                        {{- option_clean | escape -}}
+                      </label>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </fieldset>
+          {%- endcase -%}
+        {%- endfor -%}
       </div>
       <div class="field">
         <textarea
@@ -135,6 +201,82 @@
   </div>
 </div>
 
+{% stylesheet %}
+  .wt-field-optional {
+    margin-left: 8px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--wt-grey);
+  }
+
+  .wt-select {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .wt-select-label {
+    pointer-events: none;
+  }
+
+  .field--full {
+    grid-column: 1 / -1;
+  }
+
+  .wt-checkbox-group__legend {
+    padding: 0;
+    margin-bottom: 16px;
+  }
+
+  .wt-checkbox-group__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .wt-checkbox-group__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  .wt-checkbox-group__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--wt-grey);
+    color: var(--wt-offwhite);
+    font-size: var(--btn-fs);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .wt-checkbox-group__pill svg {
+    display: none;
+  }
+
+  .wt-checkbox-group__input:checked + .wt-checkbox-group__pill {
+    background: var(--wt-offwhite);
+    border-color: var(--wt-offwhite);
+    color: var(--wt-ocean);
+  }
+
+  .wt-checkbox-group__input:checked + .wt-checkbox-group__pill svg {
+    display: block;
+  }
+
+  .wt-checkbox-group__input:focus-visible + .wt-checkbox-group__pill {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-offset);
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:sections.contact-form.name",
@@ -143,6 +285,75 @@
   "disabled_on": {
     "groups": ["header", "footer"]
   },
+  "blocks": [
+    {
+      "type": "custom_text",
+      "name": "Custom field — text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "default": "Label",
+          "label": "Label"
+        },
+        {
+          "type": "select",
+          "id": "input_type",
+          "default": "text",
+          "label": "Input type",
+          "options": [
+            { "value": "text", "label": "Text" },
+            { "value": "number", "label": "Number" },
+            { "value": "email", "label": "Email" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "optional",
+          "default": false,
+          "label": "Optional"
+        }
+      ]
+    },
+    {
+      "type": "custom_select",
+      "name": "Custom field — dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "default": "Label",
+          "label": "Label"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "default": "Option one\nOption two",
+          "label": "Options",
+          "info": "One option per line."
+        }
+      ]
+    },
+    {
+      "type": "custom_checkboxes",
+      "name": "Custom field — checkbox pills",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "default": "Label",
+          "label": "Label"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "default": "Option one\nOption two",
+          "label": "Options",
+          "info": "One option per line."
+        }
+      ]
+    }
+  ],
   "settings": [
     {
       "type": "inline_richtext",
