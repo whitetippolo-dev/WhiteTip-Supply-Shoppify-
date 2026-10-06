@@ -73,6 +73,9 @@
     data-id="{{ section.id }}"
   >
     <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="wt-section-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
       {%- if section.settings.title != blank -%}
         <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           {{ section.settings.title }}
@@ -243,6 +246,12 @@
       "content": "t:sections.featured-collection.settings.header_text.content"
     },   
     {
+      "type": "text",
+      "id": "eyebrow",
+      "default": "New in",
+      "label": "Eyebrow"
+    },
+    {
       "type": "inline_richtext",
       "id": "title",
       "default": "t:sections.featured-collection.settings.title.default",
@@ -387,7 +396,7 @@
           "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
         }
       ],
-      "default": "adapt",
+      "default": "square",
       "label": "t:sections.featured-collection.settings.image_ratio.label"
     },
     {
@@ -439,7 +448,7 @@
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "default": false,
+      "default": true,
       "label": "t:sections.featured-collection.settings.show_vendor.label"
     },
     {
@@ -492,9 +501,9 @@
     {
       "type": "checkbox",
       "id": "swipe_on_mobile",
-      "default": false,
+      "default": true,
       "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
-    },          
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"

@@ -93,6 +93,16 @@
   --leading-body: 1.5;
 }
 
+/* Shared eyebrow label — teal, tracked, uppercase. Used above section
+   headings across Home, About, Club Orders, Contact, etc. */
+.wt-section-eyebrow {
+  font-size: var(--fs-web-label);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--wt-teal);
+}
+
 /* Brand-wide resets that aren't exposed as Dawn settings */
 a:focus-visible,
 button:focus-visible,
