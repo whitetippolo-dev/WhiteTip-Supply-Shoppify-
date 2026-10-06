@@ -51,7 +51,12 @@
         </fieldset>
       {%- elsif picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
+          <div class="wt-variant-legend-row">
+            <legend class="form__label">{{ option.name }}</legend>
+            {%- if forloop.first and product.metafields.custom.size_guide_page.value != blank -%}
+              {%- render 'wt-size-guide-modal', page_handle: product.metafields.custom.size_guide_page.value, section_id: section.id -%}
+            {%- endif -%}
+          </div>
           {% render 'product-variant-options',
             product: product,
             option: option,

@@ -1,0 +1,109 @@
+{% doc %}
+  Renders a "Size guide" link that opens a native <dialog> modal with the
+  content of a Shopify Page (one flat page per category — e.g. a page
+  with handle 'size-guide-paddles' — rather than a metaobject, per the
+  catalog's size: 2-3 guides doesn't need that infrastructure yet).
+
+  @param {string} page_handle - handle of the size-guide Page
+  @param {string} section_id - section id, to keep dialog ids unique on the page
+
+  @example
+  {% render 'wt-size-guide-modal', page_handle: product.metafields.custom.size_guide_page.value, section_id: section.id %}
+{% enddoc %}
+
+{%- assign wt_sg_page = pages[page_handle] -%}
+{%- if wt_sg_page != blank -%}
+  {%- assign wt_sg_dialog_id = 'SizeGuide-' | append: section_id -%}
+  <button
+    type="button"
+    class="link wt-size-guide-trigger"
+    onclick="document.getElementById('{{ wt_sg_dialog_id }}').showModal()"
+  >
+    Size guide
+  </button>
+  <dialog id="{{ wt_sg_dialog_id }}" class="wt-size-guide-dialog">
+    <div class="wt-size-guide-dialog__card">
+      <button
+        type="button"
+        class="wt-size-guide-dialog__close"
+        aria-label="{{ 'accessibility.close' | t }}"
+        onclick="document.getElementById('{{ wt_sg_dialog_id }}').close()"
+      >
+        &times;
+      </button>
+      <div class="wt-section-eyebrow">Size &amp; fit</div>
+      <h2 class="wt-size-guide-dialog__heading">{{ wt_sg_page.title | escape }}</h2>
+      <div class="rte">{{ wt_sg_page.content }}</div>
+    </div>
+  </dialog>
+{%- endif -%}
+
+{% stylesheet %}
+  .wt-variant-legend-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .wt-size-guide-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: var(--fs-web-label);
+    font-weight: 600;
+    letter-spacing: var(--btn-track);
+    text-transform: uppercase;
+    color: var(--wt-teal);
+    border-bottom: 1px solid var(--wt-teal);
+    cursor: pointer;
+    min-height: 44px;
+  }
+
+  .wt-size-guide-dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 420px;
+    width: calc(100% - 48px);
+  }
+
+  .wt-size-guide-dialog::backdrop {
+    background: var(--wt-scrim);
+  }
+
+  .wt-size-guide-dialog__card {
+    position: relative;
+    background: var(--wt-ocean-900);
+    border: 1px solid var(--wt-ocean-600);
+    padding: 36px;
+  }
+
+  .wt-size-guide-dialog__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    color: var(--wt-grey);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .wt-size-guide-dialog__heading {
+    margin: 8px 0 16px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .wt-size-guide-dialog .rte {
+    font-size: var(--fs-web-small);
+    line-height: 1.6;
+    color: var(--wt-grey);
+  }
+{% endstylesheet %}
