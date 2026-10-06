@@ -122,6 +122,75 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* WhiteTip brand lockup: fin mark + two-line wordmark */
+  .wt-brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .wt-wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.12;
+  }
+
+  .wt-wordmark__line1 {
+    font-size: var(--fs-web-small);
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    color: rgb(var(--color-foreground));
+  }
+
+  .wt-wordmark__line2 {
+    font-size: var(--fs-web-label);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--wt-grey);
+  }
+
+  @media screen and (min-width: 750px) {
+    .wt-wordmark__line1 {
+      font-size: var(--fs-web-body);
+      letter-spacing: 0.32em;
+    }
+
+    .wt-wordmark__line2 {
+      letter-spacing: 0.32em;
+    }
+  }
+
+  /* Faithful hairline (Dawn's default is a faint 8%-opacity border) */
+  .header-wrapper--border-bottom {
+    border-bottom: 1px solid var(--wt-ocean-600);
+  }
+
+  /* Nav: off-white, uppercase, tracked, 44px minimum tap target, teal underline on current page */
+  .header__inline-menu .header__menu-item {
+    min-height: 44px;
+    font-size: var(--fs-web-label);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground));
+  }
+
+  .header__inline-menu .header__active-menu-item {
+    position: relative;
+    color: rgb(var(--color-foreground));
+  }
+
+  .header__inline-menu .header__active-menu-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: var(--wt-teal);
+  }
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -184,7 +253,7 @@
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
-      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset wt-brand-lockup" aria-label="{{ shop.name | escape }} home">
         {%- if settings.logo != blank -%}
           <div class="header__heading-logo-wrapper">
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
@@ -204,9 +273,11 @@
                 preload: true
             }}
           </div>
-        {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
         {%- endif -%}
+        <span class="wt-wordmark">
+          <span class="wt-wordmark__line1">WHITETIP</span>
+          <span class="wt-wordmark__line2">POLO SUPPLY</span>
+        </span>
       </a>
       {%- if request.page_type == 'index' -%}
         </h1>
@@ -227,7 +298,7 @@
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
-      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset wt-brand-lockup" aria-label="{{ shop.name | escape }} home">
         {%- if settings.logo != blank -%}
           <div class="header__heading-logo-wrapper">
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
@@ -247,9 +318,11 @@
                 preload: true
             }}
           </div>
-        {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
         {%- endif -%}
+        <span class="wt-wordmark">
+          <span class="wt-wordmark__line1">WHITETIP</span>
+          <span class="wt-wordmark__line2">POLO SUPPLY</span>
+        </span>
       </a>
       {%- if request.page_type == 'index' -%}
         </h1>
