@@ -18,13 +18,13 @@
         },
         "scheme-2": {
           "settings": {
-            "background": "#F3F3F3",
+            "background": "#011D26",
             "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
-            "button_label": "#F3F3F3",
-            "secondary_button_label": "#121212",
-            "shadow": "#121212"
+            "text": "#F9FAF9",
+            "button": "#009CA6",
+            "button_label": "#012A36",
+            "secondary_button_label": "#F9FAF9",
+            "shadow": "#011D26"
           }
         },
         "scheme-3": {
