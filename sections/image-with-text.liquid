@@ -12,6 +12,52 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  #shopify-section-{{ section.id }} .image-with-text__text--caption.caption-with-letter-spacing {
+    color: var(--wt-teal);
+    font-size: var(--fs-web-label);
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__heading {
+    position: relative;
+    padding-bottom: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 88px;
+    height: 1px;
+    background: var(--wt-teal);
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__text.rte ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__text.rte ul li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__text.rte ul li::before {
+    content: '';
+    flex: none;
+    width: 16px;
+    height: 1px;
+    background: var(--wt-teal);
+  }
 {%- endstyle -%}
 
 {%- liquid
