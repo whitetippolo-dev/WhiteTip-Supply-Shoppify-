@@ -153,18 +153,6 @@
         "cat6": {
           "type": "featured_collection",
           "settings": {
-            "collection": "balls"
-          }
-        },
-        "cat7": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "goals"
-          }
-        },
-        "cat8": {
-          "type": "featured_collection",
-          "settings": {
             "collection": "accessories"
           }
         }
@@ -175,16 +163,14 @@
         "cat3",
         "cat4",
         "cat5",
-        "cat6",
-        "cat7",
-        "cat8"
+        "cat6"
       ],
       "settings": {
         "eyebrow": "Shop by category",
         "title": "Kit for every position",
         "heading_size": "h2",
         "image_ratio": "square",
-        "columns_desktop": 4,
+        "columns_desktop": 3,
         "color_scheme": "scheme-1",
         "show_view_all": true,
         "columns_mobile": "2",

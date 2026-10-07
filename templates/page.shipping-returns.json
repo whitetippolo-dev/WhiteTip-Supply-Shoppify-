@@ -28,16 +28,16 @@
           "type": "topic",
           "settings": {
             "heading": "Returns",
-            "content": "<p>Sealed, unused gear can be returned within 30 days of delivery.</p><ul><li>Keep the original packaging and tags.</li><li>Email hello@whitetippolo.com.au with your order number to start a return.</li><li>Refunds go to the original payment method within 5 business days of the item reaching us.</li></ul>",
+            "content": "<p>Sealed, unused gear can be returned within 30 days of delivery.</p><ul><li>Keep the original packaging and tags.</li><li>Email whitetippolo@gmail.com with your order number to start a return.</li><li>Refunds go to the original payment method within 5 business days of the item reaching us.</li></ul>",
             "button_label": "Start a return",
-            "button_link": "mailto:hello@whitetippolo.com.au"
+            "button_link": "mailto:whitetippolo@gmail.com"
           }
         },
         "damaged": {
           "type": "topic",
           "settings": {
             "heading": "Damaged or faulty",
-            "content": "<p>If gear arrives damaged or develops a fault, email hello@whitetippolo.com.au with your order number and photos. Our goods come with guarantees that cannot be excluded under the Australian Consumer Law.</p>"
+            "content": "<p>If gear arrives damaged or develops a fault, email whitetippolo@gmail.com with your order number and photos. Our goods come with guarantees that cannot be excluded under the Australian Consumer Law.</p>"
           }
         }
       },
