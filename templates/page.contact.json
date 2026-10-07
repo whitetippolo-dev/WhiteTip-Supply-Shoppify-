@@ -5,7 +5,11 @@
       "blocks": {
         "order_number": {
           "type": "custom_text",
-          "settings": { "label": "Order number", "input_type": "text", "optional": true }
+          "settings": {
+            "label": "Order number",
+            "input_type": "text",
+            "optional": true
+          }
         },
         "topic": {
           "type": "custom_select",
@@ -15,7 +19,10 @@
           }
         }
       },
-      "block_order": ["order_number", "topic"],
+      "block_order": [
+        "order_number",
+        "topic"
+      ],
       "settings": {
         "details_eyebrow": "Contact",
         "details_heading": "Get in touch",
@@ -32,5 +39,7 @@
       }
     }
   },
-  "order": ["form"]
+  "order": [
+    "form"
+  ]
 }

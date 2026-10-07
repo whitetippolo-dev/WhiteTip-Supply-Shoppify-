@@ -1,3 +1,4 @@
+/* Product page template. Requires sections/main-product.liquid. */
 {
   "sections": {
     "main": {
