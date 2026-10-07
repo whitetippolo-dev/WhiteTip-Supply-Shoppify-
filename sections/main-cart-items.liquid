@@ -147,7 +147,7 @@
                           assign wt_tracked = true
                         endif
                         assign wt_is_preorder = false
-                        if item.variant.available and wt_tracked and item.variant.inventory_quantity <= 0 and item.product.metafields.custom.lead_time_weeks.value
+                        if item.variant.available and wt_tracked and item.variant.inventory_quantity <= 0
                           assign wt_is_preorder = true
                         endif
                       -%}
@@ -157,7 +157,6 @@
                             available: item.variant.available,
                             inventory_tracked: wt_tracked,
                             inventory_quantity: item.variant.inventory_quantity,
-                            lead_time_weeks: item.product.metafields.custom.lead_time_weeks.value,
                             low_stock_threshold: settings.low_stock_threshold
                           -%}
                           <span class="wt-cart-preorder__note">Paid in full today. Ships when it lands.</span>

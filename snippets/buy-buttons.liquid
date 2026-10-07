@@ -75,7 +75,7 @@
               assign wt_tracked = true
             endif
             assign wt_is_preorder = false
-            if product.selected_or_first_available_variant.available and wt_tracked and product.selected_or_first_available_variant.inventory_quantity <= 0 and product.metafields.custom.lead_time_weeks.value
+            if product.selected_or_first_available_variant.available and wt_tracked and product.selected_or_first_available_variant.inventory_quantity <= 0
               assign wt_is_preorder = true
             endif
           -%}
@@ -112,9 +112,8 @@
           <div class="wt-preorder-note">
             <span class="wt-preorder-note__label">How pre-orders work</span>
             <p>
-              Paid in full at checkout. This length lands in about
-              {{ product.metafields.custom.lead_time_weeks.value }} weeks. We email you when it arrives
-              and again when it ships.
+              Paid in full at checkout. We order it in from the maker for you, email you when it
+              lands in Australia, and again when it ships.
             </p>
           </div>
         {%- endif -%}

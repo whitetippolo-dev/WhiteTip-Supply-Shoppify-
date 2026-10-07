@@ -43,7 +43,7 @@
       assign wt_tracked = true
     endif
     assign wt_value_preorder = false
-    if value.variant.available and wt_tracked and value.variant.inventory_quantity <= 0 and product.metafields.custom.lead_time_weeks.value
+    if value.variant.available and wt_tracked and value.variant.inventory_quantity <= 0
       assign wt_value_preorder = true
     endif
   -%}
