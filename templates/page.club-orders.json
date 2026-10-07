@@ -1,3 +1,4 @@
+/* Club orders page template. Requires sections/contact-form.liquid. */
 {
   "sections": {
     "hero": {
