@@ -47,7 +47,7 @@
           "settings": {
             "caption": "Our story",
             "text_style": "caption-with-letter-spacing",
-            "caption_size": "medium"
+            "text_size": "medium"
           }
         },
         "heading": {
@@ -102,7 +102,7 @@
           "settings": {
             "caption": "Summer Series",
             "text_style": "caption-with-letter-spacing",
-            "caption_size": "medium"
+            "text_size": "medium"
           }
         },
         "heading": {
@@ -130,7 +130,7 @@
       },
       "block_order": ["eyebrow", "heading", "text", "button"],
       "settings": {
-        "image_height": "large",
+        "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
         "desktop_content_position": "middle",

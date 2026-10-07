@@ -8,7 +8,7 @@
           "settings": {
             "caption": "Club & team orders",
             "text_style": "caption-with-letter-spacing",
-            "caption_size": "medium"
+            "text_size": "medium"
           }
         },
         "heading": {
@@ -29,14 +29,14 @@
           "type": "button",
           "settings": {
             "button_label": "Start an enquiry",
-            "button_link": "#enquiry",
+            "button_link": "/pages/club-orders#enquiry",
             "button_style_secondary": false
           }
         }
       },
       "block_order": ["eyebrow", "heading", "text", "button"],
       "settings": {
-        "image_height": "large",
+        "height": "large",
         "desktop_image_width": "medium",
         "layout": "text_first",
         "desktop_content_position": "middle",
@@ -122,6 +122,7 @@
       },
       "block_order": ["club_name", "state", "players", "gear", "needed_by"],
       "settings": {
+        "anchor_id": "enquiry",
         "heading": "Tell us about your squad",
         "heading_size": "h1",
         "color_scheme": "scheme-2",
