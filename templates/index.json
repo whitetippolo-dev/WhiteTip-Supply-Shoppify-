@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -36,17 +45,22 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "lead", "buttons"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "lead",
+        "buttons"
+      ],
       "settings": {
         "image_overlay_opacity": 60,
         "image_height": "large",
-        "desktop_content_position": "bottom-left",
-        "show_text_box": false,
         "image_behavior": "none",
+        "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
+        "show_text_box": false,
         "color_scheme": "scheme-1",
-        "mobile_content_alignment": "left",
         "stack_images_on_mobile": false,
+        "mobile_content_alignment": "left",
         "show_text_below": false
       }
     },
@@ -57,33 +71,46 @@
           "type": "column",
           "settings": {
             "title": "Stocked in Australia",
-            "text": "<p>Core range held locally. Pick up or domestic shipping options.</p>"
+            "text": "<p>Core range held locally. Pick up or domestic shipping options.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "col2": {
           "type": "column",
           "settings": {
             "title": "Direct from Europe & Asia",
-            "text": "<p>Imported straight from the makers. No middle distributor.</p>"
+            "text": "<p>Imported straight from the makers. No middle distributor.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "col3": {
           "type": "column",
           "settings": {
             "title": "30-day returns",
-            "text": "<p>Sealed, unused gear can be returned within 30 days.</p>"
+            "text": "<p>Sealed, unused gear can be returned within 30 days.</p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["col1", "col2", "col3"],
+      "block_order": [
+        "col1",
+        "col2",
+        "col3"
+      ],
       "settings": {
         "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Button label",
+        "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "left",
         "background_style": "none",
         "color_scheme": "scheme-2",
-        "image_width": "full",
-        "image_ratio": "adapt",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 0,
@@ -93,16 +120,65 @@
     "categories": {
       "type": "collection-list",
       "blocks": {
-        "cat1": { "type": "featured_collection", "settings": { "collection": "paddles" } },
-        "cat2": { "type": "featured_collection", "settings": { "collection": "boats" } },
-        "cat3": { "type": "featured_collection", "settings": { "collection": "helmets" } },
-        "cat4": { "type": "featured_collection", "settings": { "collection": "buoyancy-vests" } },
-        "cat5": { "type": "featured_collection", "settings": { "collection": "spraydecks" } },
-        "cat6": { "type": "featured_collection", "settings": { "collection": "balls" } },
-        "cat7": { "type": "featured_collection", "settings": { "collection": "goals" } },
-        "cat8": { "type": "featured_collection", "settings": { "collection": "accessories" } }
+        "cat1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "paddles"
+          }
+        },
+        "cat2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "boats"
+          }
+        },
+        "cat3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "helmets"
+          }
+        },
+        "cat4": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "buoyancy-vests"
+          }
+        },
+        "cat5": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "spraydecks"
+          }
+        },
+        "cat6": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "balls"
+          }
+        },
+        "cat7": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "goals"
+          }
+        },
+        "cat8": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "accessories"
+          }
+        }
       },
-      "block_order": ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6", "cat7", "cat8"],
+      "block_order": [
+        "cat1",
+        "cat2",
+        "cat3",
+        "cat4",
+        "cat5",
+        "cat6",
+        "cat7",
+        "cat8"
+      ],
       "settings": {
         "eyebrow": "Shop by category",
         "title": "Kit for every position",
@@ -120,21 +196,20 @@
     "new_in": {
       "type": "featured-collection",
       "settings": {
+        "collection": "new-in",
+        "products_to_show": 4,
         "eyebrow": "New in",
         "title": "Fresh off the container",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "new-in",
-        "products_to_show": 4,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "link",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
+        "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -142,6 +217,7 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -154,7 +230,7 @@
           "settings": {
             "caption": "Club & team orders",
             "text_style": "caption-with-letter-spacing",
-            "caption_size": "medium"
+            "text_size": "medium"
           }
         },
         "heading": {
@@ -180,14 +256,22 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "button"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
-        "image_height": "large",
+        "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
+        "section_color_scheme": "",
         "color_scheme": "scheme-2",
         "padding_top": 36,
         "padding_bottom": 36
@@ -201,13 +285,13 @@
           "settings": {
             "caption": "Summer Series",
             "text_style": "caption-with-letter-spacing",
-            "caption_size": "medium"
+            "text_size": "medium"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "On the water with The WhiteTip",
+            "heading": "On the water with WhiteTip",
             "heading_size": "h1"
           }
         },
@@ -227,19 +311,34 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "button"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
-        "image_height": "large",
+        "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
+        "section_color_scheme": "",
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
-  "order": ["hero", "trust", "categories", "new_in", "club_orders", "team"]
+  "order": [
+    "hero",
+    "trust",
+    "categories",
+    "new_in",
+    "club_orders",
+    "team"
+  ]
 }
