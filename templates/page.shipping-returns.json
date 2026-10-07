@@ -16,7 +16,7 @@
           "type": "topic",
           "settings": {
             "heading": "Shipping",
-            "content": "<p>We ship from Adelaide, South Australia to anywhere in Australia. Orders placed before 2pm ACST on a business day leave the same day.</p><p>Metro areas: 2–5 business days. Regional, WA, NT, TAS: 4–10 business days. Boats ship by freight, booked with you, quoted per order.</p>"
+            "content": "<p>We ship from Adelaide, South Australia to anywhere in Australia. <strong>In-stock</strong> orders placed before 2pm ACST on a business day leave the same day. Pre-orders ship when they land (see below).</p><p>Metro areas: 2–5 business days. Regional, WA, NT, TAS: 4–10 business days. Boats ship by freight: not charged at checkout, we quote and invoice it separately and book delivery with you.</p>"
           }
         },
         "pickup": {
@@ -30,14 +30,14 @@
           "type": "topic",
           "settings": {
             "heading": "Pre-orders",
-            "content": "<p>Pre-orders are paid in full at checkout. The lead time on the product page is our current estimate from the maker. We email you when your gear lands in Australia and again when it ships.</p>"
+            "content": "<p>Pre-orders are paid in full at checkout. Lead times depend on the maker and international freight, so we don't publish a fixed date. Contact us for a current estimate. We email you when your gear lands in Australia and again when it ships.</p>"
           }
         },
         "returns": {
           "type": "topic",
           "settings": {
             "heading": "Returns",
-            "content": "<p>Sealed, unused gear can be returned within 30 days of delivery.</p><ul><li>Keep the original packaging and tags.</li><li>Email whitetippolo@gmail.com with your order number to start a return.</li><li>Refunds go to the original payment method within 5 business days of the item reaching us.</li></ul>",
+            "content": "<p>Unused gear in its original packaging can be returned within 30 days of delivery for change of mind.</p><ul><li>Change of mind: you pay return postage.</li><li>Kayaks, and items cut, assembled or modified to your order, can't be returned for change of mind. Faults are always covered.</li><li>Keep the original packaging and tags.</li><li>Email whitetippolo@gmail.com with your order number to start a return.</li><li>Full details: <a href=\"/policies/refund-policy\">Refund policy</a>.</li><li>Refunds go to the original payment method within 5 business days of the item reaching us.</li></ul>",
             "button_label": "Start a return",
             "button_link": "mailto:whitetippolo@gmail.com"
           }
