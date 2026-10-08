@@ -44,14 +44,15 @@
           "settings": {
             "heading": "Shipping & returns",
             "icon": "none",
-            "page": "shipping-returns"
+            "content": "<p>We ship from Adelaide, South Australia to anywhere in Australia. <strong>In-stock</strong> orders placed before 2pm ACST on a business day leave the same day. Metro areas: 2–5 business days. Regional, WA, NT, TAS: 4–10 business days. Local pick-up in Adelaide is available at checkout.</p><p>Boats ship by freight: not charged at checkout, we quote and invoice it separately and book delivery with you.</p><p>Unused gear in its original packaging can be returned within 30 days of delivery for change of mind (you pay return postage). Kayaks, and items cut, assembled or modified to your order, can't be returned for change of mind. Faults are always covered under the Australian Consumer Law.</p><p><a href=\"/pages/shipping-returns\">Full shipping & returns details</a></p>"
           }
         },
         "preorders": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Pre-orders explained",
-            "icon": "none"
+            "icon": "none",
+            "content": "<p>Items marked <strong>Pre-order</strong> are ordered in from the maker for you. Pre-orders are paid in full at checkout.</p><p>Lead times depend on the maker and international freight, so we don't publish a fixed date. <a href=\"/pages/contact\">Contact us</a> for a current estimate.</p><p>We email you when your gear lands in Australia and again when it ships.</p>"
           }
         }
       },
