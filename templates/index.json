@@ -52,6 +52,7 @@
         "buttons"
       ],
       "settings": {
+        "image": "shopify://shop_images/IMG_0682_Original.jpg",
         "image_overlay_opacity": 60,
         "image_height": "large",
         "image_behavior": "none",
@@ -304,6 +305,7 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/IMG_0418.jpg",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "text_first",
