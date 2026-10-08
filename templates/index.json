@@ -251,7 +251,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/IMG_0875.heic",
-        "height": "adapt",
+        "height": "medium",
         "desktop_image_width": "medium",
         "layout": "image_first",
         "image_behavior": "none",
