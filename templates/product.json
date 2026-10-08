@@ -34,10 +34,9 @@
           }
         },
         "description": {
-          "type": "collapsible_tab",
+          "type": "wt_description",
           "settings": {
-            "heading": "Description",
-            "icon": "none"
+            "heading": "Description"
           }
         },
         "shipping": {
