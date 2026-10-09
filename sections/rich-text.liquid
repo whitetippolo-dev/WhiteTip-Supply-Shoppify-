@@ -53,25 +53,36 @@
               >
                 {{ block.settings.text }}
               </div>
-            {%- when 'button' -%}
+            {%- when 'button', 'buttons' -%}
+              {%- liquid
+                if block.type == 'buttons'
+                  assign btn_label_1 = block.settings.button_label_1
+                  assign btn_link_1 = block.settings.button_link_1
+                  assign btn_secondary_1 = block.settings.button_style_secondary_1
+                else
+                  assign btn_label_1 = block.settings.button_label
+                  assign btn_link_1 = block.settings.button_link
+                  assign btn_secondary_1 = block.settings.button_style_secondary
+                endif
+              -%}
               <div
-                class="rich-text__buttons{% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="rich-text__buttons{% if btn_label_1 != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
                   style="--animation-order: {{ forloop.index }};"
                 {% endif %}
               >
-                {%- if block.settings.button_label != blank -%}
+                {%- if btn_label_1 != blank -%}
                   <a
-                    {% if block.settings.button_link == blank %}
+                    {% if btn_link_1 == blank %}
                       role="link" aria-disabled="true"
                     {% else %}
-                      href="{{ block.settings.button_link }}"
+                      href="{{ btn_link_1 }}"
                     {% endif %}
-                    class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                    class="button{% if btn_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
                   >
-                    {{- block.settings.button_label | escape -}}
+                    {{- btn_label_1 | escape -}}
                   </a>
                 {%- endif -%}
                 {%- if block.settings.button_label_2 != blank -%}
@@ -315,6 +326,56 @@
          "type": "header",
          "content": "t:sections.rich-text.blocks.buttons.settings.header_button2.content"
         },          
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_2.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_2.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_2.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_2.label"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Button pair",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:sections.rich-text.blocks.buttons.settings.header_button1.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "t:sections.rich-text.blocks.buttons.settings.button_label_1.default",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_1.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_1.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_1",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_1.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.rich-text.blocks.buttons.settings.header_button2.content"
+        },
         {
           "type": "text",
           "id": "button_label_2",

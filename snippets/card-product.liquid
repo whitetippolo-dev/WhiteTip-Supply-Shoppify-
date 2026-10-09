@@ -46,7 +46,6 @@
     if wt_variant.inventory_management == 'shopify'
       assign wt_tracked = true
     endif
-    assign wt_lead_time = card_product.metafields.custom.lead_time_weeks.value
     assign wt_badge_id_nomedia = 'NoMediaStandardBadge-' | append: section_id | append: '-' | append: card_product.id
     assign wt_badge_id_media = 'Badge-' | append: section_id | append: '-' | append: card_product.id
   -%}
@@ -141,7 +140,6 @@
                 available: card_product.available,
                 inventory_tracked: wt_tracked,
                 inventory_quantity: wt_variant.inventory_quantity,
-                lead_time_weeks: wt_lead_time,
                 low_stock_threshold: settings.low_stock_threshold,
                 id: wt_badge_id_nomedia,
                 sold_out_color_scheme: settings.sold_out_badge_color_scheme
@@ -561,7 +559,6 @@
               available: card_product.available,
               inventory_tracked: wt_tracked,
               inventory_quantity: wt_variant.inventory_quantity,
-              lead_time_weeks: wt_lead_time,
               low_stock_threshold: settings.low_stock_threshold,
               id: wt_badge_id_media,
               sold_out_color_scheme: settings.sold_out_badge_color_scheme

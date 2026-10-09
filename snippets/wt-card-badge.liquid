@@ -1,15 +1,14 @@
 {% doc %}
-  Renders the WhiteTip 3-state stock/lead-time badge: in-stock (teal-outline
-  dot), low-stock (count), or pre-order (lead time in weeks). Falls back to
-  Dawn's native sold-out badge when the product is genuinely unavailable
-  with no lead time set. Takes raw product facts and decides the state
+  Renders the WhiteTip 3-state stock badge: in-stock (teal-outline dot),
+  low-stock (count), or pre-order (tracked, still sellable at 0 stock). No
+  lead time is shown: it changes too often to promise. Falls back to Dawn's
+  native sold-out badge when the product is genuinely unavailable. Takes raw product facts and decides the state
   itself, so callers (card-product.liquid, main-product.liquid,
   main-cart-items.liquid) don't have to duplicate the branching.
 
   @param {boolean} available - product.available or variant.available
   @param {boolean} inventory_tracked - true when inventory_management == 'shopify'
   @param {number} inventory_quantity - variant.inventory_quantity
-  @param {number} [lead_time_weeks] - product.metafields.custom.lead_time_weeks.value
   @param {number} low_stock_threshold - settings.low_stock_threshold
   @param {string} [id] - element id, referenced by aria-labelledby on some cards
   @param {string} [sold_out_color_scheme] - Dawn color scheme for the sold-out fallback
@@ -19,7 +18,6 @@
     available: product.available,
     inventory_tracked: inventory_tracked,
     inventory_quantity: variant.inventory_quantity,
-    lead_time_weeks: product.metafields.custom.lead_time_weeks.value,
     low_stock_threshold: settings.low_stock_threshold,
     sold_out_color_scheme: settings.sold_out_badge_color_scheme
   %}
@@ -27,9 +25,9 @@
 
 {%- liquid
   assign badge_type = 'none'
-  if available and inventory_tracked and inventory_quantity <= 0 and lead_time_weeks
+  if available and inventory_tracked and inventory_quantity <= 0
     assign badge_type = 'pre'
-    assign badge_label = 'Pre-order · ' | append: lead_time_weeks | append: ' wks'
+    assign badge_label = 'Pre-order'
   elsif available and inventory_tracked and inventory_quantity > 0 and inventory_quantity <= low_stock_threshold
     assign badge_type = 'low'
     assign badge_label = 'Only ' | append: inventory_quantity | append: ' left'

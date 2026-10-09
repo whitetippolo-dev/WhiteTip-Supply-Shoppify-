@@ -14,7 +14,7 @@
   }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
+<div class="color-{{ section.settings.color_scheme }} gradient"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handleize }}"{% endif %}>
   <div class="contact page-width{% if section.settings.details_heading == blank %} page-width--narrow{% else %} wt-contact--with-details{% endif %} section-{{ section.id }}-padding">
     {%- if section.settings.details_heading != blank -%}
       <div class="wt-contact-details">
@@ -380,7 +380,7 @@
   "blocks": [
     {
       "type": "custom_text",
-      "name": "Custom field — text",
+      "name": "Custom field: text",
       "settings": [
         {
           "type": "text",
@@ -409,7 +409,7 @@
     },
     {
       "type": "custom_select",
-      "name": "Custom field — dropdown",
+      "name": "Custom field: dropdown",
       "settings": [
         {
           "type": "text",
@@ -428,7 +428,7 @@
     },
     {
       "type": "custom_checkboxes",
-      "name": "Custom field — checkbox pills",
+      "name": "Custom field: pills",
       "settings": [
         {
           "type": "text",
@@ -449,19 +449,19 @@
   "settings": [
     {
       "type": "header",
-      "content": "Details column (optional — leave heading blank to hide)"
+      "content": "Details column"
     },
     {
       "type": "text",
       "id": "details_eyebrow",
       "label": "Details eyebrow",
+      "info": "Leave the details heading blank to hide this column.",
       "default": "Contact"
     },
     {
       "type": "text",
       "id": "details_heading",
-      "label": "Details heading",
-      "default": ""
+      "label": "Details heading"
     },
     {
       "type": "richtext",
@@ -492,6 +492,12 @@
     {
       "type": "header",
       "content": "Form"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Lets a button link straight to this form, e.g. 'enquiry' for /pages/club-orders#enquiry"
     },
     {
       "type": "inline_richtext",

@@ -47,7 +47,7 @@
           "settings": {
             "caption": "Our story",
             "text_style": "caption-with-letter-spacing",
-            "caption_size": "medium"
+            "text_size": "medium"
           }
         },
         "heading": {
@@ -102,7 +102,7 @@
           "settings": {
             "caption": "Summer Series",
             "text_style": "caption-with-letter-spacing",
-            "caption_size": "medium"
+            "text_size": "medium"
           }
         },
         "heading": {
@@ -118,19 +118,11 @@
             "text": "<p>Our team plays the Summer Series. Every paddle and helmet we stock is tested in match play first.</p>",
             "text_style": "body"
           }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Follow for updates",
-            "button_link": "",
-            "button_style_secondary": true
-          }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "button"],
+      "block_order": ["eyebrow", "heading", "text"],
       "settings": {
-        "image_height": "large",
+        "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
         "desktop_content_position": "middle",
