@@ -12,6 +12,21 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* custom_select uses Dawn's static-label .select/.select__select dropdown
+     (same as product-variant-picker.liquid) rather than the floating
+     overlapping .field__label trick: a <select> never matches
+     :placeholder-shown, so that trick's shrink state never fires and the
+     label permanently overlaps + clips the selected value. */
+  .wt-select-field {
+    margin-bottom: 1.5rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .wt-select-field {
+      margin-bottom: 2rem;
+    }
+  }
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handleize }}"{% endif %}>
@@ -160,21 +175,26 @@
               </div>
             {%- when 'custom_select' -%}
               {%- assign wt_select_options = block.settings.options | newline_to_br | strip_newlines | split: '<br />' -%}
-              <div class="field" {{ block.shopify_attributes }}>
-                <select
-                  id="ContactForm-{{ block.id }}"
-                  class="field__input wt-select"
-                  name="contact[{{ block.settings.label }}]"
-                >
-                  {%- for option in wt_select_options -%}
-                    {%- if option != blank -%}
-                      <option value="{{ option | strip | escape }}">{{ option | strip | escape }}</option>
-                    {%- endif -%}
-                  {%- endfor -%}
-                </select>
-                <label class="field__label wt-select-label" for="ContactForm-{{ block.id }}">
+              <div class="wt-select-field" {{ block.shopify_attributes }}>
+                <label class="form__label" for="ContactForm-{{ block.id }}">
                   {{- block.settings.label -}}
                 </label>
+                <div class="select">
+                  <select
+                    id="ContactForm-{{ block.id }}"
+                    class="select__select"
+                    name="contact[{{ block.settings.label }}]"
+                  >
+                    {%- for option in wt_select_options -%}
+                      {%- if option != blank -%}
+                        <option value="{{ option | strip | escape }}">{{ option | strip | escape }}</option>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </select>
+                  <span class="svg-wrapper">
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </span>
+                </div>
               </div>
             {%- when 'custom_checkboxes' -%}
               {%- assign wt_checkbox_options = block.settings.options | newline_to_br | strip_newlines | split: '<br />' -%}
