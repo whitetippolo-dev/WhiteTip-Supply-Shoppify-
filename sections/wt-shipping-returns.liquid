@@ -6,6 +6,26 @@
   headings, which would be fragile.
 {% endcomment %}
 
+{%- style -%}
+  /* Duplicated from main-collection-banner.liquid: that section's .wt-breadcrumb
+     rules live in a style tag, not rendered on this page. */
+  .wt-breadcrumb {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: var(--fs-web-small);
+    color: var(--wt-grey);
+  }
+
+  .wt-breadcrumb a {
+    color: var(--wt-grey);
+  }
+
+  .wt-breadcrumb [aria-current] {
+    color: var(--wt-offwhite);
+  }
+{%- endstyle -%}
+
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width wt-sr-header">
     <nav class="wt-breadcrumb" aria-label="{{ 'general.breadcrumb.label' | t }}">
