@@ -199,7 +199,7 @@
             {%- when 'custom_checkboxes' -%}
               {%- assign wt_checkbox_options = block.settings.options | newline_to_br | strip_newlines | split: '<br />' -%}
               <fieldset class="field field--full wt-checkbox-group" {{ block.shopify_attributes }}>
-                <legend class="field__label wt-checkbox-group__legend">{{ block.settings.label }}</legend>
+                <legend class="wt-checkbox-group__legend">{{ block.settings.label }}</legend>
                 <div class="wt-checkbox-group__options">
                   {%- for option in wt_checkbox_options -%}
                     {%- if option != blank -%}
@@ -322,22 +322,18 @@
     color: var(--wt-grey);
   }
 
-  .wt-select {
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .wt-select-label {
-    pointer-events: none;
-  }
-
   .field--full {
     grid-column: 1 / -1;
   }
 
   .wt-checkbox-group__legend {
+    display: block;
+    position: static;
     padding: 0;
     margin-bottom: 16px;
+    font-size: var(--fs-web-label);
+    letter-spacing: 0.04rem;
+    color: rgba(var(--color-foreground), 0.75);
   }
 
   .wt-checkbox-group__options {

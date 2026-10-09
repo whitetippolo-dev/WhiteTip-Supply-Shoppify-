@@ -82,6 +82,8 @@
         "color_scheme": "scheme-1",
         "image_width": "full",
         "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 88,
