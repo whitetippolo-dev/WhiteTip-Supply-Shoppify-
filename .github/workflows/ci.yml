@@ -13,7 +13,7 @@ jobs:
       - name: Skip notice
         if: env.SHOP_CLIENT_ID == '' || env.SHOP_CLIENT_SECRET == ''
         run: echo "::notice::Lighthouse skipped - add SHOP_CLIENT_ID and SHOP_CLIENT_SECRET repository secrets to enable it."
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: env.SHOP_CLIENT_ID != '' && env.SHOP_CLIENT_SECRET != ''
       - name: Lighthouse
         if: env.SHOP_CLIENT_ID != '' && env.SHOP_CLIENT_SECRET != ''
@@ -32,7 +32,7 @@ jobs:
       contents: read
       checks: write
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Theme Check
         uses: shopify/theme-check-action@v2
         with:
