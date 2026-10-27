@@ -38,15 +38,15 @@
 -%}
 
 {%- if badge_type == 'stock' -%}
-  <span id="{{ id }}" class="wt-badge wt-badge--stock">
+  <span{% if id != blank %} id="{{ id }}"{% endif %} class="wt-badge wt-badge--stock">
     <span class="wt-badge__dot" aria-hidden="true"></span>{{ badge_label }}
   </span>
 {%- elsif badge_type == 'low' -%}
-  <span id="{{ id }}" class="wt-badge wt-badge--low">{{ badge_label }}</span>
+  <span{% if id != blank %} id="{{ id }}"{% endif %} class="wt-badge wt-badge--low">{{ badge_label }}</span>
 {%- elsif badge_type == 'pre' -%}
-  <span id="{{ id }}" class="wt-badge wt-badge--pre">{{ badge_label }}</span>
+  <span{% if id != blank %} id="{{ id }}"{% endif %} class="wt-badge wt-badge--pre">{{ badge_label }}</span>
 {%- else -%}
-  <span id="{{ id }}" class="badge badge--bottom-left color-{{ sold_out_color_scheme }}">
+  <span{% if id != blank %} id="{{ id }}"{% endif %} class="badge badge--bottom-left color-{{ sold_out_color_scheme }}">
     {{- 'products.product.sold_out' | t -}}
   </span>
 {%- endif -%}
