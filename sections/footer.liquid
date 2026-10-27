@@ -213,7 +213,7 @@
                     </div>
                   {%- when 'link_list' -%}
                     {%- if block.settings.menu != blank -%}
-                      <details class="wt-footer-disclosure">
+                      <details class="wt-footer-disclosure" open>
                         <summary class="wt-footer-disclosure__summary">
                           {{- block.settings.heading -}}
                           <span class="wt-footer-disclosure__icon" aria-hidden="true"></span>
@@ -449,6 +449,19 @@
   </div>
   <div class="wt-footer-wordmark">WHITETIP POLO SUPPLY</div>
 </footer>
+
+<script>
+  // Menus render open so desktop always shows links; fold them on phones, and stop desktop clicks closing them.
+  (() => {
+    const mobile = window.matchMedia('(max-width: 749px)');
+    document.querySelectorAll('.wt-footer-disclosure').forEach((details) => {
+      if (mobile.matches) details.removeAttribute('open');
+      details.querySelector('summary').addEventListener('click', (event) => {
+        if (!mobile.matches) event.preventDefault();
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
