@@ -207,6 +207,8 @@ if (!customElements.get('product-info')) {
           updateSourceFromDestination('Inventory', ({ innerText }) => innerText === '');
           updateSourceFromDestination('Volume');
           updateSourceFromDestination('Price-Per-Item', ({ classList }) => classList.contains('hidden'));
+          updateSourceFromDestination('WtStock');
+          updateSourceFromDestination('WtPreorder');
 
           this.updateQuantityRules(this.sectionId, html);
           this.querySelector(`#Quantity-Rules-${this.dataset.section}`)?.classList.remove('hidden');
@@ -216,6 +218,9 @@ if (!customElements.get('product-info')) {
             html.getElementById(`ProductSubmitButton-${this.sectionId}`)?.hasAttribute('disabled') ?? true,
             window.variantStrings.soldOut
           );
+          // toggleSubmitButton resets the label to "Add to cart"; keep the server's (e.g. "Pre-order · pay in full")
+          const submitText = html.querySelector(`#ProductSubmitButton-${this.sectionId} span`)?.textContent.trim();
+          if (submitText && this.productForm?.submitButtonText) this.productForm.submitButtonText.textContent = submitText;
 
           publish(PUB_SUB_EVENTS.variantChange, {
             data: {

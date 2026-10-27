@@ -108,15 +108,18 @@
             {{ form | payment_button }}
           {%- endif -%}
         </div>
-        {%- if wt_is_preorder -%}
-          <div class="wt-preorder-note">
-            <span class="wt-preorder-note__label">How pre-orders work</span>
-            <p>
-              Paid in full at checkout. We order it in from the maker for you, email you when it
-              lands in Australia, and again when it ships.
-            </p>
-          </div>
-        {%- endif -%}
+        {%- comment -%} Always rendered: product-info.js swaps its contents on variant change {%- endcomment -%}
+        <div id="WtPreorder-{{ section_id }}">
+          {%- if wt_is_preorder -%}
+            <div class="wt-preorder-note">
+              <span class="wt-preorder-note__label">How pre-orders work</span>
+              <p>
+                Paid in full at checkout. We order it in from the maker for you, email you when it
+                lands in Australia, and again when it ships.
+              </p>
+            </div>
+          {%- endif -%}
+        </div>
       {%- endform -%}
     </product-form>
   {%- else -%}

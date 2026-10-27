@@ -188,7 +188,7 @@
                       assign wt_tracked = true
                     endif
                   -%}
-                  <div class="wt-pdp-stock">
+                  <div class="wt-pdp-stock" id="WtStock-{{ section.id }}">
                     {%- render 'wt-card-badge',
                       available: product.selected_or_first_available_variant.available,
                       inventory_tracked: wt_tracked,
