@@ -46,6 +46,20 @@
     if wt_variant.inventory_management == 'shopify'
       assign wt_tracked = true
     endif
+    assign wt_quantity = wt_variant.inventory_quantity
+    # Multi-variant cards speak for the whole product: "In stock" if any size has stock, else "Pre-order"; never one size's count
+    unless card_product.has_only_default_variant
+      assign wt_tracked = true
+      assign wt_quantity = 0
+      for wt_v in card_product.variants
+        if wt_v.available
+          if wt_v.inventory_management != 'shopify' or wt_v.inventory_quantity > 0
+            assign wt_tracked = false
+            break
+          endif
+        endif
+      endfor
+    endunless
     assign wt_badge_id_nomedia = 'NoMediaStandardBadge-' | append: section_id | append: '-' | append: card_product.id
     assign wt_badge_id_media = 'Badge-' | append: section_id | append: '-' | append: card_product.id
   -%}
@@ -139,7 +153,7 @@
               {%- render 'wt-card-badge',
                 available: card_product.available,
                 inventory_tracked: wt_tracked,
-                inventory_quantity: wt_variant.inventory_quantity,
+                inventory_quantity: wt_quantity,
                 low_stock_threshold: settings.low_stock_threshold,
                 id: wt_badge_id_nomedia,
                 sold_out_color_scheme: settings.sold_out_badge_color_scheme
@@ -558,7 +572,7 @@
             {%- render 'wt-card-badge',
               available: card_product.available,
               inventory_tracked: wt_tracked,
-              inventory_quantity: wt_variant.inventory_quantity,
+              inventory_quantity: wt_quantity,
               low_stock_threshold: settings.low_stock_threshold,
               id: wt_badge_id_media,
               sold_out_color_scheme: settings.sold_out_badge_color_scheme
