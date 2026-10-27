@@ -51,8 +51,10 @@
         </fieldset>
       {%- elsif picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
+          {%- comment -%} legend must be the fieldset's first child to name the group; the visible label sits in the row with the size guide {%- endcomment -%}
+          <legend class="visually-hidden">{{ option.name }}</legend>
           <div class="wt-variant-legend-row">
-            <legend class="form__label">{{ option.name }}</legend>
+            <span class="form__label" aria-hidden="true">{{ option.name }}</span>
             {%- if forloop.first and product.metafields.custom.size_guide_page.value != blank -%}
               {%- render 'wt-size-guide-modal', page_handle: product.metafields.custom.size_guide_page.value, section_id: section.id -%}
             {%- endif -%}
