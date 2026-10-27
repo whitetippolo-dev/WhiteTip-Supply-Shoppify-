@@ -20,16 +20,23 @@
     <div class="wt-logo-list__grid">
       {%- for block in section.blocks -%}
         {%- if block.type == 'logo' -%}
-          <a
-            href="{{ block.settings.url }}"
-            aria-label="{{ block.settings.name | escape }}"
+          {%- liquid
+            assign tile_tag = 'div'
+            if block.settings.url != blank
+              assign tile_tag = 'a'
+            endif
+          -%}
+          <{{ tile_tag }}
+            {% if tile_tag == 'a' %}href="{{ block.settings.url }}"{% endif %}
             class="wt-logo-list__tile"
             {{ block.shopify_attributes }}
           >
             {%- if block.settings.image != blank -%}
               {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: block.settings.name }}
+            {%- else -%}
+              <span class="wt-logo-list__name">{{ block.settings.name | escape }}</span>
             {%- endif -%}
-          </a>
+          </{{ tile_tag }}>
         {%- endif -%}
       {%- endfor -%}
     </div>
@@ -82,8 +89,17 @@
     border: 1px solid var(--wt-ocean-600);
   }
 
-  .wt-logo-list__tile:hover {
+  a.wt-logo-list__tile:hover {
     background: var(--wt-ocean-600);
+  }
+
+  .wt-logo-list__name {
+    font-size: var(--fs-web-label);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--wt-offwhite);
   }
 
   .wt-logo-list__tile img {
