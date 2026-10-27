@@ -165,7 +165,7 @@
                   name="contact[{{ block.settings.label }}]"
                   placeholder="{{ block.settings.label }}{% if block.settings.optional %} (optional){% endif %}"
                   {% unless block.settings.optional %}
-                    aria-required="true"
+                    required
                   {% endunless %}
                 >
                 <label class="field__label" for="ContactForm-{{ block.id }}">
